@@ -1,0 +1,42 @@
+{
+  "name": "Fancy-Name",
+  "description": "It is what it is",
+  "version": "0.0.1",
+  "author": "Jonathan 'Tivs' Rainey <tivoli@nurfed.com>",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url":  "http://"
+  },
+  "contributors": [
+    {"name": "Jonathan 'Tivs' Rainey", "email": "tivoli@nurfed.com"}
+  ],
+  "scripts": {
+    "start": "coffee server",
+    "test": "make test"
+  },
+  "dependencies": {
+    "express":          "*",
+    "cookie":           "*",
+    "mime":             "*",
+    "coffee-script":    "*",
+    "connect-assets":   "*",
+    "connect-redis":    "*",
+    "redis":            "*",
+    "underscore":       "*",
+    "async":            "*",
+    "fleck":            "*",
+    "socket.io":        "*",
+    "request":          "*",
+    "consolidate":      "*",
+    "less":             "*",
+    "dustjs-linkedin":  "*",
+    "dustjs-helpers":   "*",
+    "bugsnag":          "*"
+  },
+  "devDependencies": {
+    "chai":         "*",
+    "zombie":       "*"
+  }
+}
+
