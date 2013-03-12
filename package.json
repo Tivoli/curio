@@ -12,7 +12,7 @@
     {"name": "Jonathan 'Tivs' Rainey", "email": "tivoli@nurfed.com"}
   ],
   "scripts": {
-    "start": "coffee server",
+    "start": "coffee server.coffee",
     "test": "make test"
   },
   "dependencies": {
