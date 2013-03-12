@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "url": "mongodb://localhost:27017/?",
+    "db": "node_boilerplate",
+    "options": {
+      "server": { "poolSize": 4, "auto_reconnect": true }
+    }
+  },
+  "test": {
+    "db": "node_boilerplate_test"
+  },
+  "staging": {
+    "url": "mongodb://staging.address:27017/?"
+  },
+  "production": {
+    "url": "mongodb://prod.mongo.primary:27017,prod.mongo.secondary:27017/?replicaSet=my_replicaset"
+  }
+}

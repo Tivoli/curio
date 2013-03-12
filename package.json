@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url":  "http://"
+    "url":  "https://github.com/Tivoli/node-boilerplate.git"
   },
   "contributors": [
     {"name": "Jonathan 'Tivs' Rainey", "email": "tivoli@nurfed.com"}
@@ -18,7 +18,6 @@
   "dependencies": {
     "express":          "*",
     "cookie":           "*",
-    "mime":             "*",
     "coffee-script":    "*",
     "connect-assets":   "*",
     "connect-redis":    "*",
