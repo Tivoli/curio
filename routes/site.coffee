@@ -14,4 +14,4 @@ exports.index = (req, res) ->
 
 exports.templates = (req, res) ->
   res.set('Content-Type', 'application/javascript')
-  res.send tmpls
+  res.send templates
