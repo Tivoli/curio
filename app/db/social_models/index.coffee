@@ -42,3 +42,7 @@ class global.SocialModel
         return fn(err) if err?
         @user = user
         fn(null, this)
+
+fs = require('fs')
+for file in fs.readdirSync(__dirname) when "#{__dirname}/#{file}" isnt __filename
+  require("./#{file}")
