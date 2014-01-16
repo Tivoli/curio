@@ -70,3 +70,7 @@ class global.Model
   destroy: (fn) ->
     @collection.remove {_id: @_id()}, (err, model) =>
       fn?(err, this)
+
+fs = require('fs')
+for file in fs.readdirSync(__dirname) when "#{__dirname}/#{file}" isnt __filename
+  require("./#{file}")

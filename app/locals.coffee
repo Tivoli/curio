@@ -1,4 +1,4 @@
 app.locals.env    = app.get('env')
-app.locals.js     = js('boilerplate_js')
-app.locals.css    = css('boilerplate_css')
+app.locals.js     = js('application_js')
+app.locals.css    = css('application_css')
 app.locals.layout = true

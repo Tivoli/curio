@@ -35,7 +35,6 @@ app.mongo =
       else Math.floor(new Date(parseInt(date)) / 1000)
     new ObjectID.createFromTime(date)
 
-require('./model')
 require('./social_model')
 
 MongoClient.connect config.url, config.options, (err, client) ->
@@ -49,6 +48,7 @@ MongoClient.connect config.url, config.options, (err, client) ->
   app.mongo.fs_chunks     = db.collection('fs.chunks')
 
   require('./mongo_indexes')
+  require('./models')
 
   for file in fs.readdirSync("#{__dirname}/models")
     require("./models/#{file}")
