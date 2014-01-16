@@ -35,8 +35,6 @@ app.mongo =
       else Math.floor(new Date(parseInt(date)) / 1000)
     new ObjectID.createFromTime(date)
 
-require('./social_model')
-
 MongoClient.connect config.url, config.options, (err, client) ->
   return console.log(err) if err?
   app.mongo.client  = client
@@ -49,9 +47,7 @@ MongoClient.connect config.url, config.options, (err, client) ->
 
   require('./mongo_indexes')
   require('./models')
-
-  for file in fs.readdirSync("#{__dirname}/models")
-    require("./models/#{file}")
+  require('./social_models')
 
   if '--seed' in process.argv
     return process.exit(0) unless app.get('env') is 'development'
