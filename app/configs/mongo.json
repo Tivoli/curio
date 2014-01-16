@@ -1,0 +1,15 @@
+{
+  "defaults": {
+    "url": "mongodb://localhost:27017/?",
+    "db": "boilerplate",
+    "options": {
+      "server": { "poolSize": 4, "auto_reconnect": true }
+    }
+  },
+  "test": {
+    "db": "boilerplate_test"
+  },
+  "production": {
+    "url": "mongodb://<:ip>:27017,<:ip>:27017/?replicaSet=boilerplate"
+  }
+}

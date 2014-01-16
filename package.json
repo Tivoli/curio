@@ -1,41 +1,61 @@
 {
-  "name": "Fancy-Name",
-  "description": "It is what it is",
+  "name": "Website",
+  "description": "Web Server",
   "version": "0.0.1",
   "author": "Jonathan 'Tivs' Rainey <tivoli@nurfed.com>",
   "private": true,
   "repository": {
     "type": "git",
-    "url":  "https://github.com/Tivoli/node-boilerplate.git"
+    "url":  "git://github.com/Tivoli/node-boilerplate.git"
   },
-  "contributors": [
-    {"name": "Jonathan 'Tivs' Rainey", "email": "tivoli@nurfed.com"}
-  ],
+  "bugs": "https://github.com/Tivoli/node-boilerplate/issues",
+  "contributors": "https://github.com/Tivoli/node-boilerplate/graphs/contributors",
   "scripts": {
-    "start": "coffee server.coffee",
-    "test": "make test"
+    "start": "coffee boot.coffee",
+    "test": "make test-all"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "engineStrict": true,
+  "config": {
+    "blanket": {
+      "pattern": "//^((?!(node_modules|test)).)*$/",
+      "loader": "./node-loaders/coffee-script",
+      "data-cover-never": "node_modules"
+    }
   },
   "dependencies": {
-    "express":          "*",
-    "cookie":           "*",
-    "coffee-script":    "*",
-    "connect-assets":   "*",
-    "connect-redis":    "*",
-    "redis":            "*",
-    "underscore":       "*",
-    "async":            "*",
-    "fleck":            "*",
-    "socket.io":        "*",
-    "request":          "*",
-    "consolidate":      "*",
-    "less":             "*",
-    "dustjs-linkedin":  "*",
-    "dustjs-helpers":   "*",
-    "bugsnag":          "*"
+    "express":          "latest",
+    "cookie":           "latest",
+    "bcrypt":           "latest",
+    "coffee-script":    "latest",
+    "connect-assets":   "3.x",
+    "connect-redis":    "latest",
+    "connect-busboy":   "latest",
+    "redis":            "latest",
+    "mongodb":          "latest",
+    "underscore":       "latest",
+    "async":            "latest",
+    "fleck":            "latest",
+    "socket.io":        "latest",
+    "request":          "latest",
+    "consolidate":      "latest",
+    "less":             "latest",
+    "dustjs-linkedin":  "latest",
+    "dustjs-helpers":   "latest",
+    "bugsnag":          "latest",
+    "json2mongo":       "Tivoli/json2mongo",
+    "gm":               "latest",
+    "markdown":         "latest"
   },
   "devDependencies": {
-    "chai":         "*",
-    "zombie":       "*"
+    "coffeelint": "latest",
+    "mocha":      "latest",
+    "chai":       "latest",
+    "nock":       "latest",
+    "zombie":     "latest",
+    "blanket":    "latest"
   }
 }
 
