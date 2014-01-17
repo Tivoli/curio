@@ -28,7 +28,7 @@ exports.update = (req, res, next) ->
 exports.destroy = (req, res, next) ->
 
 exports.resetpassword = (req, res, next) ->
-  unless req.body.email? and _.isEmail(req.body.email)
+  unless _(req.body.email).isEmail()
     err = new Error('Missing or Invalid Email') ; err.status = 400
     return next(err)
   User.find req.body.email, (err, user) ->

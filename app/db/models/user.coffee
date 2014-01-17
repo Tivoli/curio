@@ -13,6 +13,12 @@ class global.User extends Model
       return fn(err or new Error('User Not Found')) unless data?
       new User(data).populate(fn)
 
+  @find_by_token: (token, fn) ->
+    return fn(new Error('Missing Token')) unless token? and _(token).isString()
+    app.redis.get "reset:#{token}", (err, uid) ->
+      return fn(err or new Error('Invalid Token')) unless uid?
+      User.find(uid, fn)
+
   @authenticate: (email, pass, fn) ->
     return fn(new Error('Invalid Email')) unless _(email).isEmail()
     return fn(new Error('Missing Password')) unless _(pass).isString() and pass.length
@@ -85,10 +91,16 @@ class global.User extends Model
     delete @model.password
     super(fn)
 
-  toJSON: (show_email) ->
-    id:       @id()
-    username: @username()
-    name:     @name()
-    avatar:   @avatar()
-    is_admin: @is_admin()
-    email:    @email() if show_email or @is_self
+  toJSON: ->
+    json =
+      id:       @id()
+      username: @username()
+      name:     @name()
+      avatar:   @avatar()
+      is_admin: @is_admin()
+    if @is_self
+      _(json).extend
+        email:            @email()
+        settings:         @settings()
+        authentications:  @authentications()
+    return json

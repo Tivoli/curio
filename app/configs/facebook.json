@@ -1,0 +1,7 @@
+{
+  "defaults": {
+    "url": "https://graph.facebook.com",
+    "app_id": "141103472576367",
+    "app_secret": "57vqcr9ej2ouas8o6316q59wbi3tsl6m"
+  }
+}

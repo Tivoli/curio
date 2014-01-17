@@ -3,6 +3,7 @@ mw        = require('./middleware')
 site      = require('./site')
 users     = require('./users')
 sessions  = require('./sessions')
+oauth     = require('./oauth')
 
 # Sessionless Routes
 app.get '/js/templates.js', site.templates
@@ -28,6 +29,9 @@ app.put '/users/:user', mw.private, users.update
 app.post '/sessions', sessions.create
 app.get '/sessions/token', sessions.token
 app.get '/logout', mw.authed, sessions.destroy
+
+# Oauth
+app.post '/oauth/:source', oauth.create
 
 # Bugsnag
 unless /test|development/.test(app.get('env'))

@@ -10,17 +10,7 @@ exports.destroy = (req, res) ->
     res.redirect req.get('referer')
 
 exports.token = (req, res, next) ->
-  unless req.query.token?
-    err = new Error('Missing Token')
-    err.status = 401
-    return next(err)
-  app.redis.get "reset:#{req.query.token}", (err, uid) ->
-    return next(err) if err?.status = 500
-    unless uid?
-      err = new Error('Invalid Token')
-      err.status = 401
-      return next(err)
-    User.find uid, (err, user) ->
-      return next(err) if err?.status = 500
-      json = req.session.user = user.set_self().toJSON()
-      res.redirect '/'
+  User.find_by_token req.query.token, (err, user) ->
+    return next(err) if err?.status = 401
+    req.session.user = user.set_self().toJSON()
+    res.redirect('/')
