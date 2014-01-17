@@ -13,6 +13,13 @@ class global.User extends Model
       return fn(err or new Error('User Not Found')) unless data?
       new User(data).populate(fn)
 
+  @authenticate: (email, pass, fn) ->
+    return fn(new Error('Invalid Email')) unless _(email).isEmail()
+    return fn(new Error('Missing Password')) unless _(pass).isString() and pass.length
+    @find email, (err, user) ->
+      return fn(err) if err?
+      user.set_self().match_password(pass, fn)
+
   allowed: ['email', 'username', 'password', 'name']
 
   email:            -> @model?.email
@@ -22,6 +29,7 @@ class global.User extends Model
   avatar:           -> @model?.avatar
   settings:         -> @model?.settings
   authentications:  -> @model?.authentications
+  hashed_password:  -> @model?.hashed_password
   is_admin:         -> 'admin' in (@model?.roles or [])
   first_name:       -> @name().split(' ')[0]
   last_name:        -> _(@name().split(' ')).rest().join(' ')
@@ -62,11 +70,9 @@ class global.User extends Model
       @set(hashed_password: hash)
       fn(null, this)
 
-  authenticate: (pass, fn) ->
-    return fn(new Error('Invalid Password')) unless @model.hashed_password?
-    bcrypt.compare pass, @model.hashed_password, (err, result) =>
-      return fn(err) if err?
-      return fn(new Error('Invalid Password')) unless result
+  match_password: (pass, fn) ->
+    bcrypt.compare pass, @hashed_password(), (err, result) =>
+      return fn(err or new Error('Invalid Password')) unless result
       fn(null, this)
 
   add_role: (role, fn) ->

@@ -91,7 +91,7 @@ describe 'Users PUT update', ->
       done()
 
   it 'should not sign in with old password', (done) ->
-    api.post '/sessions', {email: @user.email, password: 'wantsbrains'}, (e, r, body) =>
+    api.post '/sessions', {email: @user.email, password: 'wantsbrains'}, (e, r, body) ->
       expect(r.statusCode).to.equal 401
       done()
 
