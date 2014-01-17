@@ -1,5 +1,6 @@
 exports.index = (req, res, next) ->
-  utils.streamJSON(req, res, next, User.sorted())
+  cursor = User.sorted(req.query.page, req.query.limit)
+  utils.streamJSON(req, res, next, cursor)
 
 exports.create = (req, res, next) ->
   new User(req.body).validate (err, user) ->
