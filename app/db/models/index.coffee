@@ -4,9 +4,9 @@ class global.Model
   @find: (id, fn) ->
     query = {$or: []}
     query.$or.push({_id: @strToID(id)}) if _(id).isObjectID()
-    query.$or.push({slug: id.toLowerCase()}) if _(id.toLowerCase?()).isSlug()
-    query.$or.push({email: id.toLowerCase()}) if _(id.toLowerCase?()).isEmail()
-    query.$or.push({username: id.toLowerCase()}) if _(id.toLowerCase?()).isUsername()
+    query.$or.push({slug: id.toLowerCase()}) if _(id?.toLowerCase?()).isSlug()
+    query.$or.push({email: id.toLowerCase()}) if _(id?.toLowerCase?()).isEmail()
+    query.$or.push({username: id.toLowerCase()}) if _(id?.toLowerCase?()).isUsername()
     return fn(new Error("Missing query param for #{@name}")) unless query.$or.length
     @collection.findOne query, (err, data) =>
       return fn(err or new Error("Cannot find #{@name}")) unless data?
