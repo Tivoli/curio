@@ -19,7 +19,11 @@ _.mixin
     /^[a-z0-9-]+$/.test(string)
 
   toSlug: (string) ->
-    string.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    string.trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
 
   formatCurrency: (num) ->
     num     = num.toString()

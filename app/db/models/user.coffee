@@ -40,8 +40,6 @@ class global.User extends Model
   authentications:  -> @model?.authentications
   hashed_password:  -> @model?.hashed_password
   is_admin:         -> 'admin' in (@model?.roles or [])
-  first_name:       -> @name().split(' ')[0]
-  last_name:        -> _(@name().split(' ')).rest().join(' ')
 
   defaults: ->
     _(@model).defaults

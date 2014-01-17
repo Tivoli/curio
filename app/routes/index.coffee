@@ -1,6 +1,7 @@
 params    = require('./params')
 mw        = require('./middleware')
 site      = require('./site')
+configs   = require('./configs')
 users     = require('./users')
 sessions  = require('./sessions')
 oauth     = require('./oauth')
@@ -16,6 +17,11 @@ app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
 
 # Site
 app.get '/', site.index
+
+# Configs
+app.all '/configs*', mw.restricted
+app.get '/configs/:config', configs.read
+app.put '/configs/:config', configs.update
 
 # Users
 app.get '/users', mw.restricted, users.index
