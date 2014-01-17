@@ -2,12 +2,12 @@ params    = require('./params')
 mw        = require('./middleware')
 site      = require('./site')
 configs   = require('./configs')
+templates = require('./templates')
 users     = require('./users')
 sessions  = require('./sessions')
 oauth     = require('./oauth')
 
 # Sessionless Routes
-app.get '/js/templates.js', site.templates
 app.get '/channel.html', site.channel
 
 # Global handler for populating data to render page chrome
@@ -17,6 +17,9 @@ app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
 
 # Site
 app.get '/', site.index
+
+# Templates
+app.get '/templates/:templates', templates.read
 
 # Configs
 app.all '/configs*', mw.restricted
