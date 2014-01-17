@@ -40,18 +40,17 @@ class global.User extends Model
       return fn(new Error('Missing Email')) unless @email()?
       return fn(new Error('Missing Name')) unless @name()?
       return fn(new Error('Missing Password')) unless @password()?
-    return fn(new Error('Invalid Email')) unless _.isEmail(@email())
-    return fn(new Error('Invalid Name')) unless _.isName(@name())
-    return fn(new Error('Invalid Username')) unless _.isUsername(@username())
+    return fn(new Error('Invalid Email')) unless _(@email()).isEmail()
+    return fn(new Error('Invalid Name')) unless _(@name()).isName()
+    return fn(new Error('Invalid Username')) unless _(@username()).isUsername()
     return fn(new Error('Invalid Username')) if @username() in blocked
     return fn(new Error('Password too short')) if @password()?.length < 6
     return fn(null, this) unless @password()?
     @hash_password(fn)
 
   whitelist: (values) ->
-    updates = _.pick(values, @allowed)
+    updates = _(values).pick(@allowed)
     updates.email = updates.email.toLowerCase() if updates.email?
-    updates.username ?= utils.randomString(12)
     if updates.username?
       updates.username_original = updates.username
       updates.username          = updates.username.toLowerCase()

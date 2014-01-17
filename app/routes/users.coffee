@@ -15,13 +15,15 @@ exports.me = (req, res, next) ->
 exports.read = (req, res, next) ->
   res.format
     html: -> res.render('users/show')
-    json: -> utils.sendJSON(req, res, req.user)
+    json: -> res.json(req.user.toJSON())
 
 exports.update = (req, res, next) ->
-  method = if req.body.is_admin then 'add_role' else 'remove_role'
-  req.user[method] 'admin', (err, user) ->
-    return next(err) if err?
-    res.json user.toJSON()
+  req.user.set_self().whitelist(req.body).validate (err, user) ->
+    return next(err) if err?.status = 400
+    user.save (err, user) ->
+      return next(err) if err?.status = 500
+      json = req.session.user = user.toJSON()
+      res.json(json)
 
 exports.destroy = (req, res, next) ->
 

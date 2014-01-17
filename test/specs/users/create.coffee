@@ -1,4 +1,4 @@
-describe "Users POST create", ->
+describe 'Users POST create', ->
 
   before ->
     @base_user = factory.user()

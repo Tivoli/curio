@@ -3,7 +3,7 @@ class global.SiteConfig extends Model
 
   @find: (id, fn) ->
     id = id.toLowerCase()
-    @collection.findOne {_id: id}, (err, data) =>
+    @collection.findOne {_id: id}, (err, data) ->
       return fn(err) if err?
       return new SiteConfig(data).populate(fn) if data?
       new SiteConfig(_id: id).save fn
@@ -11,7 +11,7 @@ class global.SiteConfig extends Model
   blacklist: ['id', '_id', 'images']
 
   whitelist: (values) ->
-    updates = _.omit(values, @blacklist)
+    updates = _(values).omit(@blacklist)
     @set(updates)
 
   toJSON: ->

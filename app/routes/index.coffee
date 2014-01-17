@@ -22,7 +22,7 @@ app.post '/users', users.create
 app.get '/users/me', mw.authed, users.me
 app.post '/users/resetpassword', users.resetpassword
 app.get '/users/:user', users.read
-app.put '/users/:user', mw.restricted, users.update
+app.put '/users/:user', mw.private, users.update
 
 # Sessions
 app.post '/sessions', sessions.create
