@@ -1,5 +1,6 @@
 class global.Model
-  @strToID: (id) -> app.mongo.stringToID(id)
+  @strToID:   (id) -> app.mongo.stringToID(id)
+  @dateToID:  (date) -> app.mongo.dateToID(date)
 
   @find: (id, fn) ->
     query = {$or: []}
@@ -20,6 +21,7 @@ class global.Model
 
   constructor: (@model={}) ->
     @strToID    = Model.strToID
+    @dateToID   = Model.dateToID
     @collection = @constructor.collection
     _(this).bindAll('populate_images')
     unless @_id()?

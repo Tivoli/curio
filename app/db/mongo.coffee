@@ -31,7 +31,7 @@ app.mongo =
 
   dateToID: (date) ->
     date = switch true
-      when date instanceof Date then Math.floor(date / 1000)
+      when _(date).isDate() then Math.floor(date / 1000)
       else Math.floor(new Date(parseInt(date)) / 1000)
     new ObjectID.createFromTime(date)
 
