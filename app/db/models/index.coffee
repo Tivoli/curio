@@ -1,4 +1,6 @@
-class global.Model
+EventEmitter = require("events").EventEmitter
+
+class global.Model extends EventEmitter
   @strToID:   (id) -> app.mongo.stringToID(id)
   @dateToID:  (date) -> app.mongo.dateToID(date)
 
@@ -70,6 +72,7 @@ class global.Model
         key = _(/\$(.*?)_/.exec(err.message)).last()
         err = new Error("Duplicate #{fleck.capitalize(key)}")
       return fn?(err) if err?
+      @emit('saved')
       fn?(null, this)
 
   update: (query, fn) ->

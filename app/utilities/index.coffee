@@ -19,7 +19,8 @@ exports.walk_dir = (dir) ->
 exports.is_json_request = (req) ->
   req.is('json') or _(req.accepted).any((a) -> a.subtype is 'json')
 
-exports.save_and_send = (req, res, next, model) ->
+exports.save_and_send = (req, res, next) ->
+  model = req.resource
   async.waterfall [
     (done) -> done(null, model.whitelist(req.body))
     (model, done) -> model.validate(done)

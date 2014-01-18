@@ -74,6 +74,11 @@ describe 'Users PUT update', ->
       @base_user = body
       done()
 
+  it 'should update cached user session', (done) ->
+    api.get '/users/me', @cookie, (e, r, body) =>
+      expect(body).to.deep.equal @user
+      done()
+
   it 'should not update an invalid password', (done) ->
     @user.password = 'short'
     api.put "/users/#{@user.id}", @user, @cookie, (e, r, body) ->

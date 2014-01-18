@@ -3,30 +3,18 @@ exports.index = (req, res, next) ->
   utils.streamJSON(req, res, next, cursor)
 
 exports.create = (req, res, next) ->
-  new User(req.body).validate (err, user) ->
-    return next(err) if err?.status = 400
-    user.set_self().save (err, user) ->
-      return next(err) if err?.status = 400
-      json = req.session.user = user.toJSON()
-      res.json json
+  req.resource = new User(req.body).set_self()
+  req.resource.once 'saved', ->
+    req.session.user = req.resource.toJSON()
+  utils.save_and_send(req, res, next)
 
 exports.me = (req, res, next) ->
   res.json req.session.user
 
-exports.read = (req, res, next) ->
-  res.format
-    html: -> res.render('users/show')
-    json: -> res.json(req.user.toJSON())
-
 exports.update = (req, res, next) ->
-  req.user.set_self().whitelist(req.body).validate (err, user) ->
-    return next(err) if err?.status = 400
-    user.save (err, user) ->
-      return next(err) if err?.status = 500
-      json = req.session.user = user.toJSON()
-      res.json(json)
-
-exports.destroy = (req, res, next) ->
+  req.resource.once 'saved', ->
+    req.session.user = req.resource.toJSON()
+  utils.save_and_send(req, res, next)
 
 exports.resetpassword = (req, res, next) ->
   unless _(req.body.email).isEmail()
@@ -41,6 +29,6 @@ exports.resetpassword = (req, res, next) ->
 
 exports.update_role = (req, res, next) ->
   method = if req.method is 'POST' then 'add' else 'remove'
-  req.user.update_role method, req.body.role, (err, user) ->
+  req.resource.update_role method, req.body.role, (err, user) ->
     return next(err) if err?.status = 400
     res.json(user.toJSON())

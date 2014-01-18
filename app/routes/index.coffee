@@ -22,7 +22,7 @@ app.get '/', site.index
 
 # Configs
 app.all '/configs*', mw.restricted
-app.get '/configs/:config', configs.read
+app.get '/configs/:config', mw.read
 app.put '/configs/:config', configs.update
 
 # Sessions
@@ -38,15 +38,15 @@ app.get '/users', mw.restricted, users.index
 app.post '/users', users.create
 app.get '/users/me', mw.authed, users.me
 app.post '/users/resetpassword', users.resetpassword
-app.get '/users/:user', users.read
+app.get '/users/:user', mw.read
 app.put '/users/:user', mw.private, users.update
 app.all '/users/:user/roles', mw.restricted, users.update_role
 
 # Posts
 app.post '/posts', mw.restricted, posts.create
-app.get '/posts/:post', posts.read
-app.put '/posts/:post', mw.restricted, posts.update
-app.delete '/posts/:post', mw.restricted, posts.destroy
+app.get '/posts/:post', mw.read
+app.put '/posts/:post', mw.restricted, utils.save_and_send
+app.delete '/posts/:post', mw.restricted, mw.destroy
 
 # Bugsnag
 unless /test|development/.test(app.get('env'))

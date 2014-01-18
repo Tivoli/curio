@@ -70,6 +70,14 @@ describe 'Users POST create', ->
       expect(body.name).to.equal @user.name
       expect(body.username).to.equal @user.username
       expect(body).to.not.have.property('password')
+      _(@base_user).extend(body)
+      @cookie = r.headers['set-cookie'].pop().split(';')[0]
+      done()
+
+  it 'should update cached user session', (done) ->
+    delete @user.password
+    api.get '/users/me', @cookie, (e, r, body) =>
+      expect(body).to.deep.equal @user
       done()
 
   it 'should not store a users plain text password', (done) ->
@@ -86,7 +94,7 @@ describe 'Users POST create', ->
       done()
 
   it 'should not create a new user with the same username', (done) ->
-    @user.email = 'another@shopzaozao.com'
+    @user.email = 'another@example.com'
     api.post '/users', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 400
       expect(body.error).to.equal 'Duplicate Username'
