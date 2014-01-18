@@ -42,7 +42,7 @@
     "request":          "latest",
     "consolidate":      "latest",
     "less":             "latest",
-    "dustjs-linkedin":  "latest",
+    "dustjs-linkedin":  "~2.2",
     "dustjs-helpers":   "latest",
     "bugsnag":          "latest",
     "json2mongo":       "Tivoli/json2mongo",

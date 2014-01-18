@@ -19,15 +19,15 @@ class global.User extends Model
       return fn(err or new Error('Invalid Token')) unless uid?
       User.find(uid, fn)
 
-  @sorted: (page, limit) ->
-    @paginated(page, limit).sort('email', 'asc')
-
   @authenticate: (email, pass, fn) ->
     return fn(new Error('Invalid Email')) unless _(email).isEmail()
     return fn(new Error('Missing Password')) unless _(pass).isString() and pass.length
     @find email, (err, user) ->
       return fn(err) if err?
       user.set_self().match_password(pass, fn)
+
+  @sorted: (page, limit) ->
+    @paginated(page, limit).sort('email', 'asc')
 
   allowed: ['email', 'username', 'password', 'name']
 

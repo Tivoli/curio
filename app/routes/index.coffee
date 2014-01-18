@@ -9,6 +9,7 @@ oauth     = require('./oauth')
 
 # Sessionless Routes
 app.get '/channel.html', site.channel
+app.get '/templates/:templates', templates.read
 
 # Global handler for populating data to render page chrome
 app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
@@ -17,9 +18,6 @@ app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
 
 # Site
 app.get '/', site.index
-
-# Templates
-app.get '/templates/:templates', templates.read
 
 # Configs
 app.all '/configs*', mw.restricted
