@@ -38,3 +38,9 @@ exports.resetpassword = (req, res, next) ->
     app.redis.set "reset:#{token}", user.id(), 'NX', 'EX', 172800, (err, obj) ->
       return next(err) if err?.status = 500
       res.send 200
+
+exports.update_role = (req, res, next) ->
+  method = if req.method is 'POST' then 'add' else 'remove'
+  req.user.update_role method, req.body.role, (err, user) ->
+    return next(err) if err?.status = 400
+    res.json(user.toJSON())

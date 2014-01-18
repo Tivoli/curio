@@ -31,6 +31,7 @@ app.get '/users/me', mw.authed, users.me
 app.post '/users/resetpassword', users.resetpassword
 app.get '/users/:user', users.read
 app.put '/users/:user', mw.private, users.update
+app.all '/users/:user/roles', mw.restricted, users.update_role
 
 # Sessions
 app.post '/sessions', sessions.create

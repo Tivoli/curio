@@ -46,6 +46,13 @@ class global.User extends Model
       settings: {}
       authentications: []
 
+  update_role: (method, role, fn) ->
+    return fn(new Error('Missing Role')) unless _(role).isString()
+    query = switch method
+      when 'add' then {$addToSet: {roles: role}}
+      else {$pull: {roles: role}}
+    @update(query, fn)
+
   set_self: ->
     @is_self = true
     return this
