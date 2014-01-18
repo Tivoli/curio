@@ -34,6 +34,7 @@ describe 'Posts POST create', ->
     api.post '/posts', @post, @admin_cookie, (e, r, body) =>
       expect(r.statusCode).to.equal 200
       expect(body.title).to.equal @post.title
+      expect(body.slug).to.equal _(@post.title).toSlug()
       expect(body.context).to.equal @post.context
       expect(body).to.have.property 'created_at'
       expect(body.author).to.have.property 'name'

@@ -21,6 +21,7 @@ class global.Post extends Model
   toJSON: ->
     id:         @id()
     title:      @title()
+    slug:       @slug()
     created_at: @created_at()
     context:    @context()
     author:     @author?.toJSON()
