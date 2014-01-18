@@ -18,6 +18,10 @@ _.mixin
     return false unless _(string).isString()
     /^[a-z0-9-]+$/.test(string)
 
+  isISODate: (string) ->
+    return false unless _(string).isString()
+    /^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/.test(string)
+
   toSlug: (string) ->
     string.trim()
       .toLowerCase()

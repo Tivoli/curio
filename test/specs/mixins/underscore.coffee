@@ -98,6 +98,23 @@ describe 'Mixins underscore', ->
     expect(_('valid-slug').isSlug()).to.be.true
     expect(_('valid-slug-1').isSlug()).to.be.true
 
+  # ==== isISODate ====
+  it 'should not validate an ISO date without a string', ->
+    expect(_(1).isISODate()).to.be.false
+    expect(_(null).isISODate()).to.be.false
+    expect(_(undefined).isISODate()).to.be.false
+    expect(_(new Error('Invalid')).isISODate()).to.be.false
+    expect(_({}).isISODate()).to.be.false
+    expect(_([]).isISODate()).to.be.false
+
+  it 'should not validate an invalid ISO date', ->
+    expect(_().isISODate('invalid')).to.be.false
+    expect(_().isISODate('2014-01-1821:21:15')).to.be.false
+    expect(_().isISODate('2014-01-1821:21:15.000Z')).to.be.false
+
+  it 'should validate an ISO date', ->
+    expect(_('2014-01-18T21:21:15.000Z').isISODate()).to.be.true
+
   # ==== toSlug ====
   it 'should convert a string to a valid slug', ->
     expect(_('Test Slug 1').toSlug()).to.equal 'test-slug-1'

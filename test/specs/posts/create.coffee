@@ -36,7 +36,7 @@ describe 'Posts POST create', ->
       expect(body.title).to.equal @post.title
       expect(body.slug).to.equal _(@post.title).toSlug()
       expect(body.context).to.equal @post.context
-      expect(body).to.have.property 'created_at'
+      expect(_(body.created_at).isISODate()).to.be.true
       expect(body.author).to.have.property 'name'
       expect(body.author).to.have.property 'username'
       done()

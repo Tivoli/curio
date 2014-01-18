@@ -23,6 +23,7 @@ describe 'Posts PUT update', ->
       expect(r.statusCode).to.equal 200
       expect(body.title).to.equal 'New Post Title'
       expect(body.slug).to.equal 'new-post-title'
+      expect(_(body.created_at).isISODate()).to.be.true
       @base_post = body
       done()
 
@@ -32,5 +33,6 @@ describe 'Posts PUT update', ->
       expect(r.statusCode).to.equal 200
       expect(body.title).to.equal 'New Post Title'
       expect(body.slug).to.equal 'new-post-title'
+      expect(_(body.created_at).isISODate()).to.be.true
       expect(body.context).to.equal 'Updated blog post context'
       done()
