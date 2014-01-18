@@ -45,6 +45,8 @@ app.all '/users/:user/roles', mw.restricted, users.update_role
 # Posts
 app.post '/posts', mw.restricted, posts.create
 app.get '/posts/:post', posts.read
+app.put '/posts/:post', mw.restricted, posts.update
+app.delete '/posts/:post', mw.restricted, posts.destroy
 
 # Bugsnag
 unless /test|development/.test(app.get('env'))
