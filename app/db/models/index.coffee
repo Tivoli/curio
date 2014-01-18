@@ -23,23 +23,27 @@ class global.Model
     @strToID    = Model.strToID
     @dateToID   = Model.dateToID
     @collection = @constructor.collection
-    _(this).bindAll('populate_images')
+    _(this).bindAll('populate_images', 'populate_author')
     unless @_id()?
       @model = _.pick(@model, @allowed) if @allowed?
-      @whitelist?(@model)
       @defaults?()
     return this
 
-  _id:        -> @model?._id
-  _user:      -> @model?._user
-  id:         -> @model?._id?.toHexString()
-  slug:       -> @model?.slug
+  _id:        -> @model._id
+  _user:      -> @model._user
+  id:         -> @model._id?.toHexString()
+  slug:       -> @model.slug
   created_at: -> new Date(@_id().getTimestamp()).toISOString()
 
+  validate: (fn) ->
+    return fn(null, this)
+
   set: (values={}) ->
-    @model ?= {}
     @model[key] = val for key, val of values
     return this
+
+  set_user: (id) ->
+    @set({_user: @strToID(id)})
 
   populate_images: (fn) ->
     images = []
@@ -47,12 +51,17 @@ class global.Model
     stream.on 'data', (item) -> images.push(new Image(item).toJSON())
     stream.on 'close', -> fn(null, images)
 
+  populate_author: (fn) ->
+    User.find @_user(), fn
+
   populate: (fn) ->
     funcs = {}
     funcs.images = @populate_images
+    funcs.author = @populate_author if @_user()?
     async.parallel funcs, (err, results) =>
       return fn(err) if err?
       @images = results.images or []
+      @author = results.author
       fn(null, this)
 
   save: (fn) ->

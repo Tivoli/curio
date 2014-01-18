@@ -2,6 +2,9 @@
 app.mongo.users.ensureIndex 'username', {unique: true}, ->
 app.mongo.users.ensureIndex 'email', {unique: true}, ->
 
+# Posts
+app.mongo.posts.ensureIndex 'slug', {unique: true}, ->
+
 # Images
 app.mongo.fs_files.ensureIndex 'metadata.type', ->
 app.mongo.fs_files.ensureIndex 'metadata._id', ->

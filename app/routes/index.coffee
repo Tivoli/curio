@@ -3,9 +3,10 @@ mw        = require('./middleware')
 site      = require('./site')
 configs   = require('./configs')
 templates = require('./templates')
-users     = require('./users')
 sessions  = require('./sessions')
 oauth     = require('./oauth')
+users     = require('./users')
+posts     = require('./posts')
 
 # Sessionless Routes
 app.get '/channel.html', site.channel
@@ -24,6 +25,14 @@ app.all '/configs*', mw.restricted
 app.get '/configs/:config', configs.read
 app.put '/configs/:config', configs.update
 
+# Sessions
+app.post '/sessions', sessions.create
+app.get '/sessions/token', sessions.token
+app.get '/logout', mw.authed, sessions.destroy
+
+# Oauth
+app.post '/oauth/:source', oauth.create
+
 # Users
 app.get '/users', mw.restricted, users.index
 app.post '/users', users.create
@@ -33,13 +42,9 @@ app.get '/users/:user', users.read
 app.put '/users/:user', mw.private, users.update
 app.all '/users/:user/roles', mw.restricted, users.update_role
 
-# Sessions
-app.post '/sessions', sessions.create
-app.get '/sessions/token', sessions.token
-app.get '/logout', mw.authed, sessions.destroy
-
-# Oauth
-app.post '/oauth/:source', oauth.create
+# Posts
+app.post '/posts', mw.restricted, posts.create
+app.get '/posts/:post', posts.read
 
 # Bugsnag
 unless /test|development/.test(app.get('env'))

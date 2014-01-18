@@ -31,14 +31,14 @@ class global.User extends Model
 
   allowed: ['email', 'username', 'password', 'name']
 
-  email:            -> @model?.email
-  username:         -> @model?.username_original or @model?.username
-  password:         -> @model?.password
-  name:             -> @model?.name
-  avatar:           -> @model?.avatar
-  settings:         -> @model?.settings
-  authentications:  -> @model?.authentications
-  hashed_password:  -> @model?.hashed_password
+  email:            -> @model.email
+  username:         -> @model.username_original or @model?.username
+  password:         -> @model.password
+  name:             -> @model.name
+  avatar:           -> @model.avatar
+  settings:         -> @model.settings
+  authentications:  -> @model.authentications
+  hashed_password:  -> @model.hashed_password
   is_admin:         -> 'admin' in (@model?.roles or [])
 
   defaults: ->
@@ -46,16 +46,16 @@ class global.User extends Model
       settings: {}
       authentications: []
 
+  set_self: ->
+    @is_self = true
+    return this
+
   update_role: (method, role, fn) ->
     return fn(new Error('Missing Role')) unless _(role).isString()
     query = switch method
       when 'add' then {$addToSet: {roles: role}}
       else {$pull: {roles: role}}
     @update(query, fn)
-
-  set_self: ->
-    @is_self = true
-    return this
 
   validate: (fn) ->
     unless @_id()?
@@ -88,12 +88,6 @@ class global.User extends Model
     bcrypt.compare pass, @hashed_password(), (err, result) =>
       return fn(err or new Error('Invalid Password')) unless result
       fn(null, this)
-
-  add_role: (role, fn) ->
-    @update {$addToSet: {roles: role}}, fn
-
-  remove_role: (role, fn) ->
-    @update {$pull: {roles: role}}, fn
 
   save: (fn) ->
     delete @model.password

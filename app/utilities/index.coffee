@@ -20,12 +20,14 @@ exports.is_json_request = (req) ->
   req.is('json') or _(req.accepted).any((a) -> a.subtype is 'json')
 
 exports.save_and_send = (req, res, next, model) ->
-  model.save (err, model) ->
+  async.waterfall [
+    (done) -> done(null, model.whitelist(req.body))
+    (model, done) -> model.validate(done)
+    (model, done) -> model.save(done)
+    (model, done) -> model.populate(done)
+  ], (err, model) ->
     return next(err) if err?.status = 400
-    return res.json(model.toJSON()) unless model.populate?
-    model.populate (err, model) ->
-      return next(err) if err?.status = 500
-      res.json model.toJSON()
+    res.json(model.toJSON())
 
 exports.cursorJSON = (cursor, fn) ->
   stream  = cursor.stream()
