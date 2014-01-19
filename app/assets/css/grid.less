@@ -1,0 +1,39 @@
+[data-mobile] { display: none !important; }
+
+.grid-row {
+  width: 92%;
+  max-width: @max-site-width;
+  margin: 0 auto;
+  position: relative;
+  .clearfix;
+
+  .grid-unit {
+    width: 25%;
+    float: left;
+    display: inline;
+    position: relative;
+
+    &.col-2 { width: 50%; }
+    &.col-3 { width: 75%; }
+    &.col-4 { width: 100%; }
+  }
+
+  &.row-3 {
+    .grid-unit {
+      width: 33.3336%;
+      &.col-2 { width: 66.6667%; }
+      &.col-3 { width: 100%; }
+    }
+  }
+}
+
+@media @media_mobile {
+  [data-mobile] { display: block !important; }
+  [data-desktop] { display: none !important; }
+
+  .grid-row {
+    width: 98%;
+    .grid-unit { width: 100%; }
+  }
+}
+
