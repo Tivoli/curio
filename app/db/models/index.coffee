@@ -10,6 +10,7 @@ class global.Model extends EventEmitter
     query.$or.push({slug: id.toLowerCase()}) if _(id?.toLowerCase?()).isSlug()
     query.$or.push({email: id.toLowerCase()}) if _(id?.toLowerCase?()).isEmail()
     query.$or.push({username: id.toLowerCase()}) if _(id?.toLowerCase?()).isUsername()
+    query.$or.push({path: id.toLowerCase()}) if _(id).isString() and @name is 'Page'
     return fn(new Error("Missing query param for #{@name}")) unless query.$or.length
     @collection.findOne query, (err, data) =>
       return fn(err or new Error("Cannot find #{@name}")) unless data?
@@ -39,6 +40,10 @@ class global.Model extends EventEmitter
 
   validate: (fn) ->
     return fn(null, this)
+
+  whitelist: (values) ->
+    updates = _(values).pick(@allowed)
+    @set(updates)
 
   set: (values={}) ->
     @model[key] = val for key, val of values

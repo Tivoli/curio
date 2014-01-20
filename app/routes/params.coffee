@@ -23,3 +23,9 @@ app.param ':post', (req, res, next, id) ->
     return next(err) if err?.status = 404
     req.resource = post
     next()
+
+app.param ':page', (req, res, next, id) ->
+  Page.find id, (err, page) ->
+    return next(err) if err?.status = 404
+    req.resource = page
+    next()

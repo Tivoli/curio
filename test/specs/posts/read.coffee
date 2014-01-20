@@ -1,7 +1,7 @@
 describe 'Posts GET read', ->
 
   before ->
-    post = require("#{@seeds}/posts")[0]
+    post  = require("#{@seeds}/posts")[0]
     @post = new Post(post).toJSON()
 
   it 'should not find a post that does not exist', (done) ->

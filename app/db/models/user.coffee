@@ -32,7 +32,7 @@ class global.User extends Model
   allowed: ['email', 'username', 'password', 'name']
 
   email:            -> @model.email
-  username:         -> @model.username_original or @model?.username
+  username:         -> @model.username_original or @model.username
   password:         -> @model.password
   name:             -> @model.name
   avatar:           -> @model.avatar

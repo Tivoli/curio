@@ -7,6 +7,7 @@ sessions  = require('./sessions')
 oauth     = require('./oauth')
 users     = require('./users')
 posts     = require('./posts')
+pages     = require('./pages')
 cms       = require('./cms')
 
 # Sessionless Routes
@@ -48,6 +49,12 @@ app.post '/posts', mw.restricted, posts.create
 app.get '/posts/:post', mw.read
 app.put '/posts/:post', mw.restricted, utils.save_and_send
 app.delete '/posts/:post', mw.restricted, mw.destroy
+
+# Pages
+app.post '/pages', mw.restricted, pages.create
+app.get '/pages/:page', mw.read
+app.put '/pages/:page', mw.restricted, utils.save_and_send
+app.delete '/pages/:page', mw.restricted, mw.destroy
 
 # CMS
 app.all '/cms*', mw.restricted

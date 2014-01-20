@@ -7,14 +7,14 @@ class global.Post extends Model
   context:  -> @model.context
 
   validate: (fn) ->
-    return fn(new Error('Missing Title')) unless @title()?
-    return fn(new Error('Missing Context')) unless @context()?
+    return fn(new Error('Missing Title')) unless @title()?.length
+    return fn(new Error('Missing Context')) unless @context()?.length
     User.collection.find({_id: @_user()}).count (err, count) =>
       return fn(err or new Error('Invalid User')) unless count
       fn(null, this)
 
   whitelist: (values) ->
-    updates       = _.pick(values, @allowed)
+    updates       = _(values).pick(@allowed)
     updates.slug  = _(updates.title).toSlug() if updates.title?
     @set(updates)
 

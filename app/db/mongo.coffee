@@ -42,6 +42,7 @@ MongoClient.connect config.url, config.options, (err, client) ->
 
   app.mongo.users         = db.collection('users')
   app.mongo.posts         = db.collection('posts')
+  app.mongo.pages         = db.collection('pages')
   app.mongo.configs       = db.collection('configs')
   app.mongo.fs_files      = db.collection('fs.files')
   app.mongo.fs_chunks     = db.collection('fs.chunks')

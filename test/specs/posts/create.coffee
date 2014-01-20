@@ -23,7 +23,7 @@ describe 'Posts POST create', ->
       expect(body.error).to.equal 'Missing Title'
       done()
 
-  it 'should require a body to create a post', (done) ->
+  it 'should require a context to create a post', (done) ->
     delete @post.context
     api.post '/posts', @post, @admin_cookie, (e, r, body) ->
       expect(r.statusCode).to.equal 400
