@@ -1,0 +1,5 @@
+{?layout}{>"layouts/cms"/}{:else}{+content/}{/layout}
+{<content}
+<div id="index" data-view='Index'>
+</div>
+{/content}

@@ -7,6 +7,7 @@ sessions  = require('./sessions')
 oauth     = require('./oauth')
 users     = require('./users')
 posts     = require('./posts')
+cms       = require('./cms')
 
 # Sessionless Routes
 app.get '/channel.html', site.channel
@@ -48,6 +49,10 @@ app.get '/posts/:post', mw.read
 app.put '/posts/:post', mw.restricted, utils.save_and_send
 app.delete '/posts/:post', mw.restricted, mw.destroy
 
+# CMS
+app.all '/cms*', mw.restricted
+app.get '/cms', cms.index
+
 # Bugsnag
 unless /test|development/.test(app.get('env'))
   app.use (err, req, res, next) ->
@@ -55,5 +60,5 @@ unless /test|development/.test(app.get('env'))
       bugsnag.errorHandler(err, req, res, next)
     next(err)
 
-unless app.get('env') is 'development'
-  app.use site.error
+#unless app.get('env') is 'development'
+app.use site.error

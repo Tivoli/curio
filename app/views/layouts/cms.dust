@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  {>"common/head"/}
+  <body>
+    {>"common/header"/}
+    <main role='main'>{+content/}</main>
+    {>"common/footer"/}
+    {>"scripts/jquery"/}
+    {js|s}
+    <script src='/templates/cms.js'></script>
+    {>"scripts/google"/}
+    {>"scripts/facebook"/}
+  </body>
+</html>
