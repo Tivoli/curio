@@ -27,9 +27,8 @@ before (done) ->
     done()
 
 # Create a shared browser
-before (done) ->
+before ->
   @browser = new Browser(@user_cookie, @admin_cookie)
-  @browser.visit('/', done)
 
 # Destroy the browser after all tests
 after ->

@@ -67,5 +67,5 @@ unless /test|development/.test(app.get('env'))
       bugsnag.errorHandler(err, req, res, next)
     next(err)
 
-#unless app.get('env') is 'development'
-app.use site.error
+unless app.get('env') is 'development'
+  app.use site.error
