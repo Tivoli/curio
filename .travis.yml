@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - "0.10"
+  - '0.10'
 services:
   - redis-server
   - mongodb
+env:
+  global:
+    - secure: Gv5pyqiPfDJHdIb1mUp2CECl5nTmwZj7UhYe/CRMyPTyrLHibRTqmr3XLKyMHMD+lS/qSh8mq3xrWvchTfr2XZrHws6S5I/BaOHO/8j5JxPLSbqXQdNhE7QOH41KFz5VQfDia5IHxrEskLGJiuZrZehr253AXcfje50Jy2SVFsE=
+after_success:
+  - ./update-gh-pages.sh
