@@ -1,5 +1,0 @@
-{?layout}{>"layouts/application"/}{:else}{+content/}{/layout}
-{<content}
-<div id="home" data-view='Home'>
-</div>
-{/content}
