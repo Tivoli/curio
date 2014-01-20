@@ -1,8 +1,10 @@
-idx = 1
+idx = 0
 
 module.exports = (page={}) ->
+  idx++
   defaults =
-    path: "path-#{idx++}"
+    path: "path-#{idx}"
+    title: "Pages #{idx}"
     context: """
       #Sit ea adipisci.
       Sit accusantium quia totam unde?

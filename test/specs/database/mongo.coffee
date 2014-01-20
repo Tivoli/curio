@@ -14,4 +14,5 @@ describe '#mongo', ->
   it 'should have indexes on the pages collection', (done) ->
     app.mongo.pages.indexInformation (err, index) ->
       expect(index).to.include.keys('path_1')
+      expect(index).to.include.keys('title_1')
       done()

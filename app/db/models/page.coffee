@@ -1,13 +1,15 @@
 class global.Page extends Model
   @collection: app.mongo.pages
 
-  allowed: ['path', 'context']
+  allowed: ['path', 'title', 'context']
 
+  title:    -> @model.title
   path:     -> @model.path_original or @model.path
   context:  -> @model.context
 
   validate: (fn) ->
     return fn(new Error('Missing Path')) unless @path()?.length
+    return fn(new Error('Missing Title')) unless @title()?.length
     return fn(new Error('Missing Context')) unless @context()?.length
     fn(null, this)
 
@@ -21,4 +23,5 @@ class global.Page extends Model
   toJSON: ->
     id:       @id()
     path:     @path()
+    title:    @title()
     context:  @context()

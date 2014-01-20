@@ -25,10 +25,20 @@ describe 'Pages PUT update', ->
       @base_page = body
       done()
 
+  it 'should update a page title', (done) ->
+    @page.title = 'New Title'
+    api.put "/pages/#{@page.id}", @page, @admin_cookie, (e, r, body) =>
+      expect(r.statusCode).to.equal 200
+      expect(body.path).to.equal 'new-page-path'
+      expect(body.title).to.equal 'New Title'
+      @base_page = body
+      done()
+
   it 'should update a page context', (done) ->
     @page.context = 'Updated page context'
     api.put "/pages/#{@page.id}", @page, @admin_cookie, (e, r, body) ->
       expect(r.statusCode).to.equal 200
       expect(body.path).to.equal 'new-page-path'
+      expect(body.title).to.equal 'New Title'
       expect(body.context).to.equal 'Updated page context'
       done()

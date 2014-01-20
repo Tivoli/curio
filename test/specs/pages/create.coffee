@@ -16,11 +16,18 @@ describe 'Pages POST create', ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should require a url to create a page', (done) ->
+  it 'should require a path to create a page', (done) ->
     delete @page.path
     api.post '/pages', @page, @admin_cookie, (e, r, body) ->
       expect(r.statusCode).to.equal 400
       expect(body.error).to.equal 'Missing Path'
+      done()
+
+  it 'should require a title to create a page', (done) ->
+    delete @page.title
+    api.post '/pages', @page, @admin_cookie, (e, r, body) ->
+      expect(r.statusCode).to.equal 400
+      expect(body.error).to.equal 'Missing Title'
       done()
 
   it 'should require a context to create a page', (done) ->
@@ -37,8 +44,16 @@ describe 'Pages POST create', ->
       expect(body.context).to.equal @page.context
       done()
 
-  it 'should not create a duplicate page', (done) ->
+  it 'should not create a page with the same path', (done) ->
+    @page.title = 'Another title'
     api.post '/pages', @page, @admin_cookie, (e, r, body) ->
       expect(r.statusCode).to.equal 400
       expect(body.error).to.equal 'Duplicate Path'
+      done()
+
+  it 'should not create a page with the same title', (done) ->
+    @page.path = 'another-page'
+    api.post '/pages', @page, @admin_cookie, (e, r, body) ->
+      expect(r.statusCode).to.equal 400
+      expect(body.error).to.equal 'Duplicate Title'
       done()

@@ -7,6 +7,7 @@ app.mongo.posts.ensureIndex 'slug', {unique: true}, ->
 
 # Pages
 app.mongo.pages.ensureIndex 'path', {unique: true}, ->
+app.mongo.pages.ensureIndex 'title', {unique: true}, ->
 
 # Images
 app.mongo.fs_files.ensureIndex 'metadata.type', ->
