@@ -30,6 +30,11 @@ describe 'Posts POST create', ->
       expect(body.error).to.equal 'Missing Context'
       done()
 
+  it 'should not validate a post for a non existent user', (done) ->
+    new Post(@post).set_user('52dd81c8e1139ccddc8d53da').validate (err, post) ->
+      expect(err.message).to.equal 'Invalid User'
+      done()
+
   it 'should create a post', (done) ->
     api.post '/posts', @post, @admin_cookie, (e, r, body) =>
       expect(r.statusCode).to.equal 200
