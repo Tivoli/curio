@@ -5,7 +5,7 @@ services:
   - redis-server
   - mongodb
 after_success:
-  - "./update-gh-pages.sh"
+  - "./.update-gh-pages.sh"
 env:
   global:
     secure: q9FbALuFQc+bCD4EleXvE0tkrJ9FvbEEC6MWczV4egJ6h5GJrh61ZEY8zDEuS36Ch4B9dr/K7aut3+1RfA6awuQ4K2hNVIN72ITIvtM95ePps1DEW5DBGut+Zi3NdHEBUCP83J4b7xt/LE6hjt4o2xsOzqukwD8Bx7/9Z+Utz6M=
