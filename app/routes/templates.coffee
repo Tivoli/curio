@@ -2,7 +2,6 @@ fs        = require('fs')
 path      = require('path')
 compiled  = {}
 
-#require('../assets/js/lib/dust_helpers')
 compile = (type) ->
   directory = path.join(app.get('views'), type)
   regex     = new RegExp("#{directory}/(.*).dust$")

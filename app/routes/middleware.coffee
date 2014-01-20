@@ -23,9 +23,10 @@ exports.restricted = (req, res, next) ->
 exports.read = (req, res) ->
   name = req.resource.constructor.name
   root = fleck.pluralize(name).toLowerCase()
+  json = req.resource.toJSON()
   res.format
-    html: -> res.render("#{root}/show")
-    json: -> res.json(req.resource.toJSON())
+    html: -> res.render("templates/#{root}/show", json)
+    json: -> res.json(json)
 
 exports.destroy = (req, res, next) ->
   req.resource.destroy ->

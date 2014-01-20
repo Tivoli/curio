@@ -1,5 +1,6 @@
 fs = require('fs')
-require('./underscore_mixins')
+require('../shared/underscore_mixins')
+require('../shared/dust_helpers')
 
 exports.randomString = (length=32) ->
   str = ''

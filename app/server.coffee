@@ -12,11 +12,10 @@ global.fleck    = require('fleck')
 global.request  = require('request').defaults(_json: true)
 global.app      = express()
 global.bugsnag  = require('bugsnag')
-global.dust     = require('dustjs-linkedin')
+global.dust     = require('dustjs-linkedin') ; require('dustjs-helpers')
 global.utils    = require('./utilities')
 
 require('./configs')
-require('dustjs-helpers')
 
 RedisStore  = require('connect-redis')(express)
 app.sessionStore  = new RedisStore(app.get('redis_config'))
