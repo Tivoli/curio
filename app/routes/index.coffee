@@ -60,7 +60,7 @@ app.delete '/pages/:page', mw.restricted, mw.destroy
 app.all '/cms*', mw.restricted
 app.get '/cms', cms.index
 
-app.get '/:page', mw.read
+app.get '/:page_or_post', mw.read
 
 # Bugsnag
 unless /test|development/.test(app.get('env'))

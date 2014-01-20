@@ -1,0 +1,9 @@
+{?layout}{>"layouts/application"/}{:else}{+content/}{/layout}
+{<content}
+<div id='post' class='grid-row' data-view='Post'>
+  <div class="grid-unit col-4">
+    <h1>{title}</h1>
+    {@markdown}{context}{/markdown}
+  </div>
+</div>
+{/content}
