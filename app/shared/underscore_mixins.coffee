@@ -5,7 +5,7 @@ _.mixin
 
   isUsername: (string) ->
     return false unless _(string).isString()
-    /^[\w\d\.-]{1,15}$/i.test(string)
+    /^[\w\d\.-]{2,15}$/i.test(string)
 
   isName: (string) ->
     return false unless _(string).isString()

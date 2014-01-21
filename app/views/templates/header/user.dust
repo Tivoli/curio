@@ -1,0 +1,5 @@
+{?id}
+{:else}
+  <a data-modal='SignInModal'>Sign In</a>
+  <a data-modal='RegisterModal'>Register</a>
+{/id}

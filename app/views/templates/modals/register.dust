@@ -1,0 +1,8 @@
+<a class='close'>&#215;</a>
+<form action='/users' method='post'>
+  <div><i class="icon-user"></i><input type='text' name='name' placeholder='Name' pattern="^[\u00c0-\u01ff'\w\d\s\.\-]{3,}$" required></div>
+  <div><i class="icon-user"></i><input type='text' name='username' placeholder='Username' pattern="^[\w\d\.-]{2,15}$" required></div>
+  <div><i class="icon-email"></i><input type='email' name='email' placeholder='Email' pattern='^[a-z0-9_.%+\-]+@[0-9a-z.\-]+\.[a-z]{2,6}$' required></div>
+  <div><i class="icon-lock"></i><input type='password' name='password' placeholder='Password' pattern='^.{6,}$' required></div>
+  <div><input type='submit' value='Sign Up'></div>
+</form>

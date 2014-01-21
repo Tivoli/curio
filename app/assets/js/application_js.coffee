@@ -3,3 +3,12 @@
 #= require vendor/backbone
 #= require vendor/dust-core
 #= require vendor/dust-helpers-1.1.2
+#= require_tree plugins
+#= require_tree ../../shared
+#= require router
+#= require app
+#= require_tree lib
+#= require_tree models
+#= require_tree collections
+#= require_tree views
+#= require routes

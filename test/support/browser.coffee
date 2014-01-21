@@ -18,9 +18,14 @@ class global.Browser extends zombie
     @setCookie(name: 'connect.sid', value: @admin_cookie)
     return this
 
+  reset_form: (form) ->
+    for field in @queryAll('[name]', form)
+      @fill(field, null)
+    return this
+
   fill_form: (form, data) ->
     for k, v of data
-      field = form.querySelector("[name=#{k}]")
+      field = @query("[name=#{k}]", form)
       @fill(field, v)
     return this
 

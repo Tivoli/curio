@@ -7,7 +7,7 @@
     {>"common/footer"/}
     {>"scripts/jquery"/}
     {js|s}
-    <script src='/templates/cms.js'></script>
+    <script src='/templates/templates.js'></script>
     {>"scripts/google"/}
     {>"scripts/facebook"/}
   </body>
