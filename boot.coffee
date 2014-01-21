@@ -12,4 +12,4 @@ if cluster.isMaster
 
   cluster.fork() while cpus--
 else
-  require('./app')
+  require('./app/server')
