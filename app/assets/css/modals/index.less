@@ -1,0 +1,42 @@
+.overlay {
+  z-index: 999;
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.8);
+
+  .ov_body {
+    display: table;
+    table-layout: fixed;
+    .size(100%);
+
+    .ov_inner {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+
+      .ov_content {
+        display: inline-block;
+        text-align: left;
+        position: relative;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid @color-gray;
+        .border-radius(10px);
+        .box-shadow(1px 1px 5px 0 rgba(0,0,0,0.15));
+
+        .close {
+          color: @color-gray;
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          font: 25px Arial;
+        }
+      }
+    }
+  }
+}

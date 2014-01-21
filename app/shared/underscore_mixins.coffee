@@ -35,3 +35,10 @@ _.mixin
     cents   = num.slice(-2)
     dollars = dollars.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     "$#{dollars}.#{cents}"
+
+  subdomain: (string) ->
+    return unless _(string).isString()
+    results = /\b(?!www\.)(\w+(?:-\w+)*)\.(?=[^\/]*\..{2,5})/.exec(string)
+    #req.headers.host
+    return results?[1]
+

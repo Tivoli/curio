@@ -13,4 +13,3 @@ class App.views.SessionModal extends App.OverlayView
     App.Api.post('/sessions', data).done (user) =>
       App.user.set(user)
       @remove()
-

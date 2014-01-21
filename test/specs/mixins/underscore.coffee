@@ -127,3 +127,22 @@ describe 'Mixins underscore', ->
     expect(_(199).formatCurrency()).to.equal '$1.99'
     expect(_(10009999).formatCurrency()).to.equal '$100,099.99'
     expect(_(100009999).formatCurrency()).to.equal '$1,000,099.99'
+
+  # ==== subdomain ====
+  it 'should not get a subdomain without a string', ->
+    expect(_(1).subdomain()).to.not.be.ok
+    expect(_(null).subdomain()).to.not.be.ok
+    expect(_(undefined).subdomain()).to.not.be.ok
+    expect(_(new Error('Invalid')).subdomain()).to.not.be.ok
+    expect(_({}).subdomain()).to.not.be.ok
+    expect(_([]).subdomain()).to.not.be.ok
+
+  it 'should not get a subdomain for zone apex or www from a url', ->
+    expect(_('http://example.com').subdomain()).to.not.be.ok
+    expect(_('https://example.com').subdomain()).to.not.be.ok
+    expect(_('http://www.example.com').subdomain()).to.not.be.ok
+    expect(_('https://www.example.com').subdomain()).to.not.be.ok
+
+  it 'should get the subdomain from a url', ->
+    expect(_('http://sub.example.com').subdomain()).to.equal 'sub'
+    expect(_('https://sub.example.com').subdomain()).to.equal 'sub'
