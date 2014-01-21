@@ -31,8 +31,15 @@
 @color-gray:    #aaaaaa;
 @color-black:   #111111;
 
+html {
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body { height: 100%; }
+
 body {
-  margin-top: 150px;
   font: @font-size 'Montserrat';
   &.noscroll { overflow: hidden; }
 }
