@@ -28,7 +28,7 @@ test-lint:
 test-cov:
 	@NODE_COV=1 $(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=html-cov > coverage.html
 
-test-all: test-lint test test-cov
+test-all: test-lint test
 
 tag:
 	git push

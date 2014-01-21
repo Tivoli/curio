@@ -5,7 +5,7 @@ describe 'Users register', ->
     @browser.logout().visit('/', done)
 
   before (done) ->
-    @header = @browser.querySelector('header[role=banner]')
+    @header = @browser.query('header[role=banner]')
     @browser.clickLink('a[data-modal=RegisterModal]', done)
 
   before ->

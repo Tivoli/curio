@@ -9,31 +9,31 @@ describe 'Sessions POST create', ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should not login with a missing email', (done) ->
+  it 'should not sign in with a missing email', (done) ->
     delete @user.email
     api.post '/sessions', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should not login with a missing password', (done) ->
+  it 'should not sign in with a missing password', (done) ->
     delete @user.password
     api.post '/sessions', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should not login with an invalid email', (done) ->
+  it 'should not sign in with an invalid email', (done) ->
     @user.email = 'invalid'
     api.post '/sessions', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should not login with a bad password', (done) ->
+  it 'should not sign in with a bad password', (done) ->
     @user.password = 'invalid'
     api.post '/sessions', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 401
       done()
 
-  it 'should login with credentials', (done) ->
+  it 'should sign in with credentials', (done) ->
     api.post '/sessions', @user, (e, r, body) ->
       expect(r.statusCode).to.equal 200
       expect(body.username).to.equal 'Zombie1'
