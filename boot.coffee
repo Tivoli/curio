@@ -1,3 +1,5 @@
+require('coffee-script/register')
+
 cluster     = require('cluster')
 cpus        = require('os').cpus().length
 description = require('./package').description

@@ -14,6 +14,7 @@
     "start": "coffee boot.coffee",
     "test": "make test-all"
   },
+  "main": "./boot.coffee",
   "engines": {
     "node": "~0.10.0"
   },

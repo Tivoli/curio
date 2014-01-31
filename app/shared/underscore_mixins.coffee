@@ -39,6 +39,5 @@ _.mixin
   subdomain: (string) ->
     return unless _(string).isString()
     results = /\b(?!www\.)(\w+(?:-\w+)*)\.(?=[^\/]*\..{2,5})/.exec(string)
-    #req.headers.host
     return results?[1]
 

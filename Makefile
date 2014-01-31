@@ -14,7 +14,7 @@ test:
 	@NODE_ENV=$(NODE_ENV) PORT=3001 ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
 		$(MOCHA_OPTS) \
-		--compilers coffee:coffee-script \
+		--compilers coffee:coffee-script/register \
 		--require test/support/setup \
 		--timeout 20s \
 		--bail \
