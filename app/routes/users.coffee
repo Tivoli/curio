@@ -18,17 +18,16 @@ exports.update = (req, res, next) ->
 
 exports.resetpassword = (req, res, next) ->
   unless _(req.body.email).isEmail()
-    err = new Error('Missing or Invalid Email') ; err.status = 400
-    return next(err)
+    return next(new BadRequest('Missing or Invalid Email'))
   User.find req.body.email, (err, user) ->
-    return next(err) if err?.status = 400
+    return next(err) if err?
     token = "#{utils.randomString(24)}.#{user.id()}"
     app.redis.set "reset:#{token}", user.id(), 'NX', 'EX', 172800, (err, obj) ->
-      return next(err) if err?.status = 500
+      return next(err) if err?
       res.send 200
 
 exports.update_role = (req, res, next) ->
   method = if req.method is 'POST' then 'add' else 'remove'
   req.resource.update_role method, req.body.role, (err, user) ->
-    return next(err) if err?.status = 400
+    return next(err) if err?
     res.json(user.toJSON())

@@ -18,7 +18,7 @@ describe 'Sessions GET token', ->
 
   it 'should not reset with a non existent user', (done) ->
     api.post '/users/resetpassword', {email: 'invalid@example.com'}, (e, r, body) ->
-      expect(r.statusCode).to.equal 400
+      expect(r.statusCode).to.equal 404
       expect(body.error).to.equal 'Cannot find User'
       done()
 

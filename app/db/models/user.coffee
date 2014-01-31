@@ -10,18 +10,18 @@ class global.User extends Model
       'authentications.source': source
       'authentications.uid': uid
     @collection.findOne query, (err, data) ->
-      return fn(err or new Error('User Not Found')) unless data?
+      return fn(err or new NotFound('User Not Found')) unless data?
       new User(data).populate(fn)
 
   @find_by_token: (token, fn) ->
-    return fn(new Error('Missing Token')) unless token? and _(token).isString()
+    return fn(new Unauthorized()) unless token? and _(token).isString()
     app.redis.get "reset:#{token}", (err, uid) ->
-      return fn(err or new Error('Invalid Token')) unless uid?
+      return fn(err or new Unauthorized()) unless uid?
       User.find(uid, fn)
 
   @authenticate: (email, pass, fn) ->
-    return fn(new Error('Invalid Email')) unless _(email).isEmail()
-    return fn(new Error('Missing Password')) unless _(pass).isString() and pass.length
+    return fn(new Unauthorized()) unless _(email).isEmail()
+    return fn(new Unauthorized()) unless _(pass).isString() and pass.length
     @find email, (err, user) ->
       return fn(err) if err?
       user.set_self().match_password(pass, fn)
@@ -51,7 +51,7 @@ class global.User extends Model
     return this
 
   update_role: (method, role, fn) ->
-    return fn(new Error('Missing Role')) unless _(role).isString()
+    return fn(new BadRequest('Missing Role')) unless _(role).isString()
     query = switch method
       when 'add' then {$addToSet: {roles: role}}
       else {$pull: {roles: role}}
@@ -59,14 +59,14 @@ class global.User extends Model
 
   validate: (fn) ->
     unless @_id()?
-      return fn(new Error('Missing Email')) unless @email()?
-      return fn(new Error('Missing Name')) unless @name()?
-      return fn(new Error('Missing Password')) unless @password()?
-    return fn(new Error('Invalid Email')) unless _(@email()).isEmail()
-    return fn(new Error('Invalid Name')) unless _(@name()).isName()
-    return fn(new Error('Invalid Username')) unless _(@username()).isUsername()
-    return fn(new Error('Invalid Username')) if @username() in blocked
-    return fn(new Error('Password too short')) if @password()?.length < 6
+      return fn(new BadRequest('Missing Email')) unless @email()?
+      return fn(new BadRequest('Missing Name')) unless @name()?
+      return fn(new BadRequest('Missing Password')) unless @password()?
+    return fn(new BadRequest('Invalid Email')) unless _(@email()).isEmail()
+    return fn(new BadRequest('Invalid Name')) unless _(@name()).isName()
+    return fn(new BadRequest('Invalid Username')) unless _(@username()).isUsername()
+    return fn(new BadRequest('Invalid Username')) if @username() in blocked
+    return fn(new BadRequest('Password too short')) if @password()?.length < 6
     return fn(null, this) unless @password()?
     @hash_password(fn)
 
@@ -86,7 +86,7 @@ class global.User extends Model
 
   match_password: (pass, fn) ->
     bcrypt.compare pass, @hashed_password(), (err, result) =>
-      return fn(err or new Error('Invalid Password')) unless result
+      return fn(err or new Unauthorized('Invalid Password')) unless result
       fn(null, this)
 
   save: (fn) ->

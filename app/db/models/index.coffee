@@ -11,9 +11,9 @@ class global.Model extends EventEmitter
     query.$or.push({email: id.toLowerCase()}) if _(id?.toLowerCase?()).isEmail()
     query.$or.push({username: id.toLowerCase()}) if _(id?.toLowerCase?()).isUsername()
     query.$or.push({path: id.toLowerCase()}) if _(id).isString() and @name is 'Page'
-    return fn(new Error("Missing query param for #{@name}")) unless query.$or.length
+    return fn(new BadRequest("Missing query param for #{@name}")) unless query.$or.length
     @collection.findOne query, (err, data) =>
-      return fn(err or new Error("Cannot find #{@name}")) unless data?
+      return fn(err or new NotFound("Cannot find #{@name}")) unless data?
       new global[@name](data).populate(fn)
 
   @paginated: (page=1, limit=20) ->
@@ -75,7 +75,7 @@ class global.Model extends EventEmitter
     @collection.save @model, {safe: true}, (err, model) =>
       if err? and /^E11000 duplicate key/.test(err.message)
         key = _(/\$(.*?)_/.exec(err.message)).last()
-        err = new Error("Duplicate #{fleck.capitalize(key)}")
+        err = new BadRequest("Duplicate #{fleck.capitalize(key)}")
       return fn?(err) if err?
       @emit('saved')
       fn?(null, this)

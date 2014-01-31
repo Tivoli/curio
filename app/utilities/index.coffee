@@ -28,7 +28,7 @@ exports.save_and_send = (req, res, next) ->
     (model, done) -> model.save(done)
     (model, done) -> model.populate(done)
   ], (err, model) ->
-    return next(err) if err?.status = 400
+    return next(err) if err?
     res.json(model.toJSON())
 
 exports.cursorJSON = (cursor, fn) ->
@@ -44,5 +44,5 @@ exports.cursorJSON = (cursor, fn) ->
 
 exports.streamJSON = (req, res, next, cursor) ->
   utils.cursorJSON cursor, (err, data) ->
-    return next(err) if err?.status = 500
+    return next(err) if err?
     res.json(data)

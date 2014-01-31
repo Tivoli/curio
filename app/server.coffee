@@ -20,6 +20,7 @@ global.bugsnag  = require('bugsnag')
 global.dust     = require('dustjs-linkedin') ; require('dustjs-helpers')
 global.utils    = require('./utilities')
 
+require('./errors')
 require('./configs')
 
 RedisStore  = require('connect-redis')(express)

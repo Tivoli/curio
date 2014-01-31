@@ -7,18 +7,15 @@ exports.load_locals = (req, res, next) ->
 
 exports.authed = (req, res, next) ->
   return next() if req.session?.user?
-  err = new Error('Unauthorized') ; err.status = 401
-  next(err)
+  next(new Unauthorized())
 
 exports.private = (req, res, next) ->
   return next() if req.session?.user?.id is req.resource.id()
-  err = new Error('Unauthorized') ; err.status = 401
-  next(err)
+  next(new Unauthorized())
 
 exports.restricted = (req, res, next) ->
   return next() if req.session?.user?.is_admin
-  err = new Error('Unauthorized') ; err.status = 401
-  next(err)
+  next(new Unauthorized())
 
 exports.read = (req, res) ->
   name = req.resource.constructor.name
@@ -29,6 +26,6 @@ exports.read = (req, res) ->
     json: -> res.json(json)
 
 exports.destroy = (req, res, next) ->
-  req.resource.destroy ->
-    return next(err) if err?.status = 500
+  req.resource.destroy (err) ->
+    return next(err) if err
     res.send(200)

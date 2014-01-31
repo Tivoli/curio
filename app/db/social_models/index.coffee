@@ -20,7 +20,7 @@ class global.SocialModel
       @user = user
       return fn(null, this) if @user?
       @fetch (err, self) =>
-        return fn(new Error('Cannot find user')) unless @email()?
+        return fn(new NotFound('Cannot find user')) unless @email()?
         User.find @email(), (err, user) =>
           @user = user
           return fn(null, this) if @user?

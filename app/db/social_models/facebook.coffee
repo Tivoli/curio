@@ -4,8 +4,8 @@ config  = app.get('facebook_config')
 class global.Facebook extends SocialModel
 
   validate: (fn) ->
-    return fn(new Error('Missing UID')) unless @uid()?
-    return fn(new Error('Missing Token')) unless @token()?
+    return fn(new BadRequest('Missing UID')) unless @uid()?
+    return fn(new BadRequest('Missing Token')) unless @token()?
     fn(null, this)
 
   access_token: (fn) ->
@@ -19,12 +19,12 @@ class global.Facebook extends SocialModel
     request.get opts, (err, r, body) ->
       return fn(err) if err?
       token = qs.parse(body).access_token
-      return fn(new Error('Missing token')) unless token?
+      return fn(new BadRequest('Missing token')) unless token?
       fn(null, token)
 
   fetch: (fn) ->
     request.get "#{config.url}/me?access_token=#{@token()}", (e, r, body) =>
-      return fn(new Error(body)) unless r?.statusCode is 200
+      return fn(new BadRequest(body)) unless r?.statusCode is 200
       @model.uid       = body.id.toString()
       @model.name      = body.name
       @model.username  = body.username

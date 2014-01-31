@@ -8,9 +8,9 @@ class global.Page extends Model
   context:  -> @model.context
 
   validate: (fn) ->
-    return fn(new Error('Missing Path')) unless @path()?.length
-    return fn(new Error('Missing Title')) unless @title()?.length
-    return fn(new Error('Missing Context')) unless @context()?.length
+    return fn(new BadRequest('Missing Path')) unless @path()?.length
+    return fn(new BadRequest('Missing Title')) unless @title()?.length
+    return fn(new BadRequest('Missing Context')) unless @context()?.length
     fn(null, this)
 
   whitelist: (values) ->
