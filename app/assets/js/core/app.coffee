@@ -7,11 +7,14 @@ window.App =
 
   initialize: (opts={}) ->
     @user = new @models.User
+    @listenTo @router, 'route:before', @route_before
     new @views.Header(el: $('header[role=banner]'), model: @user)
     Backbone.history.start(pushState: true)
-    App.Api.get('/users/me')
-      .fail (args...) -> console.log args
-      .done (user) => @user.set(user)
+    App.Api.get('/users/me').done (user) => @user.set(user)
+
+  route_before: (route, name) ->
+    $('html,body').animate({scrollTop: 0}, 0)
+    view.remove() for view in @current
 
   remove_view: (view) ->
     @current = _(@current).reject (v) -> v.cid is view.cid
@@ -19,7 +22,6 @@ window.App =
 
 _(App).extend(Backbone.Events)
 _(App).bindAll('remove_view')
-App.router = new AppRouter
 
 $window   = $(window)
 $document = $(document)

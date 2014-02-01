@@ -63,11 +63,10 @@ app.get '/cms', cms.index
 app.get '/:page_or_post', mw.read
 
 # Bugsnag
-unless /test|development/.test(app.get('env'))
+unless app.get('env') in ['test', 'development']
   app.use (err, req, res, next) ->
-    if not err.status? or /^5\d+/.test(err.status)
+    if not err.statusCode? or /^5\d+/.test(err.statusCode)
       bugsnag.errorHandler(err, req, res, next)
     next(err)
 
-unless app.get('env') is 'development'
-  app.use site.error
+app.use site.error

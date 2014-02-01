@@ -15,9 +15,6 @@ class window.AppRouter extends Backbone.Router
         e.preventDefault()
         @navigate(href.slice(1), trigger: true))
 
-  routes:
-    '':               'home'
-
   route: (route, name, fn) ->
     super route, name, =>
       @trigger 'route:before', route, name

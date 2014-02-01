@@ -45,7 +45,6 @@ app.configure ->
 app.configure 'development', ->
   app.use express.logger('dev')
   app.use express.static("#{__dirname}/public")
-  app.use express.errorHandler(dumpExceptions: true, showStack: true)
   app.use require('connect-assets')(paths: assets)
   app.use express.compress()
 
@@ -75,3 +74,7 @@ process.on 'SIGINT', ->
     mongo: (done) -> app.mongo.client.close(done)
     server: (done) -> server.close(done)
   , (err, results) -> process.exit(0)
+  setTimeout ->
+    console.error "Forcefully shutting down"
+    process.exit(1)
+  , 30*1000

@@ -6,7 +6,7 @@
     <main role='main'>{+content/}</main>
     {>"common/footer"/}
     {>"scripts/jquery"/}
-    {js|s}
+    {app_js|s}
     <script src='/templates/templates.js'></script>
     {>"scripts/google"/}
     {>"scripts/facebook"/}
