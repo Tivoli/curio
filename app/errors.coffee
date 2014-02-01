@@ -7,6 +7,7 @@ class global.Unauthorized extends Error
   constructor: ->
     @statusCode = 401
     @message = 'Unauthorized'
+    super()
 
 class global.NotFound extends Error
   constructor: (@message) ->

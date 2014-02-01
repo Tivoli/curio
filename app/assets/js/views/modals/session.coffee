@@ -1,4 +1,6 @@
-class App.views.SessionModal extends App.OverlayView
+class App.views.SessionModal extends App.View
+  @mixins('Overlay')
+
   ov_id:    'session_modal'
   template: 'modals/session'
 

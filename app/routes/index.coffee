@@ -17,7 +17,6 @@ app.get '/templates/:templates', templates.read
 # Global handler for populating data to render page chrome
 app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
   res.locals.current_user = req.session?.user
-  subdomain = _(req.headers.host).subdomain()
   next()
 
 # Site

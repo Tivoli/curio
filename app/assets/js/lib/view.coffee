@@ -1,21 +1,17 @@
 class App.View extends Backbone.View
 
-  action_events:
-    'submit [data-action=subscribe]': 'form_subscribe'
+  @mixins: (mixins...) ->
+    for mixin in mixins
+      continue unless App.mixins[mixin]::?
+      this::[key] = value for key, value of App.mixins[mixin]::
 
   events: ->
-    _.extend {}, @dom_events, @action_events, @overlay_events
+    events = {}
+    _(events).extend(v) for k,v of this when /[\w]+_events$/.test(k)
+    return events
 
-  signup: (e) ->
-    FB.login (res) =>
-      return unless res.authResponse?
-      body =
-        uid: res.authResponse.userID
-        token: res.authResponse.accessToken
-      App.Api.post('/oauth/facebook', body).done (user) =>
-        App.user.set(user)
-        @remove()
-    , {scope: 'email,publish_stream'}
+  action_events:
+    'submit [data-action=subscribe]': 'form_subscribe'
 
   stop_propagation: (e) ->
     e.stopPropagation() unless e.should_continue
@@ -47,30 +43,4 @@ class App.View extends Backbone.View
     json = {collection: json} if _(json).isArray()
     dust.render "templates/#{@template or @id}", json, (err, out) =>
       @setElement(out).append()
-    return this
-
-class App.OverlayView extends App.View
-  className:  'overlay'
-  ov_class:   'ov_content'
-
-  overlay_events:
-    'click':                        'remove'
-    'click .close, [data-close]':   'remove'
-    'click .ov_content':            'stop_propagation'
-    'click a[href], a[data-modal]': 'continue_propagation'
-
-  continue_propagation: (e) ->
-    e.should_continue = true
-
-  render: ->
-    @noscroll = true
-    App.current.push(this)
-    body  = $('<div />', class: 'ov_body').appendTo @$el
-    inner = $('<div />', class: 'ov_inner').appendTo body
-    @$ov  = $('<div />', class: @ov_class, id: @ov_id).appendTo inner
-    json  = (@model or @collection)?.toJSON() or {}
-    dust.render "templates/#{@template or @ov_id}", json, (err, out) =>
-      @$ov.html(out)
-      @$el.appendTo $('body').addClass('noscroll')
-      @trigger('view:render')
     return this

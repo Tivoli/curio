@@ -1,3 +1,6 @@
+/*! dustjs-helpers - v1.1.2
+* https://github.com/linkedin/dustjs-helpers
+* Copyright (c) 2014 Aleksander Williams; Released under the MIT License */
 (function(dust){
 
 // Note: all error conditions are logged to console and failed silently
@@ -171,7 +174,7 @@ var helpers = {
       to = p.to || 'output',
       key = p.key || 'current',
       dump;
-    to = dust.helpers.tap(to, chunk, context),
+    to = dust.helpers.tap(to, chunk, context);
     key = dust.helpers.tap(key, chunk, context);
     if (key === 'full') {
       dump = JSON.stringify(context.stack, jsonFilter, 2);

@@ -2,7 +2,7 @@
 #= require vendor/underscore
 #= require vendor/backbone
 #= require vendor/dust-core
-#= require vendor/dust-helpers-1.1.2
+#= require vendor/dust-helpers
 #= require_tree plugins
 #= require_tree ../../shared
 #= require router

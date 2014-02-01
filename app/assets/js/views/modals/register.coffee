@@ -1,4 +1,6 @@
-class App.views.RegisterModal extends App.OverlayView
+class App.views.RegisterModal extends App.View
+  @mixins('Overlay')
+
   ov_id:    'register_modal'
   template: 'modals/register'
 

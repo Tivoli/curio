@@ -2,13 +2,16 @@ window.App =
   models:       {}
   collections:  {}
   views:        {}
+  mixins:       {}
   current:      []
 
   initialize: (opts={}) ->
     @user = new @models.User
     new @views.Header(el: $('header[role=banner]'), model: @user)
     Backbone.history.start(pushState: true)
-    App.Api.get('/users/me').done (user) => @user.set(user)
+    App.Api.get('/users/me')
+      .fail (args...) -> console.log args
+      .done (user) => @user.set(user)
 
   remove_view: (view) ->
     @current = _(@current).reject (v) -> v.cid is view.cid
