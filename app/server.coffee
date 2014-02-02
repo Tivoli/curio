@@ -37,7 +37,7 @@ app.configure ->
   app.use express.urlencoded()
   app.use express.json()
   app.use busboy()
-  app.use express.cookieParser('boilerplate cookie')
+  app.use express.cookieParser('curio cookie')
   app.use express.session(cookie: {maxAge: 604800000}, store: app.sessionStore)
   app.use express.methodOverride()
   app.use app.router
