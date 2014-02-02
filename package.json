@@ -1,15 +1,15 @@
 {
-  "name": "Website",
-  "description": "Web Server",
+  "name": "Curio",
+  "description": "Curio Web Server",
   "version": "0.0.1",
   "author": "Jonathan 'Tivs' Rainey <tivoli@nurfed.com>",
   "private": true,
   "repository": {
     "type": "git",
-    "url":  "git://github.com/Tivoli/node-boilerplate.git"
+    "url":  "git://github.com/Tivoli/curio.git"
   },
-  "bugs": "https://github.com/Tivoli/node-boilerplate/issues",
-  "contributors": "https://github.com/Tivoli/node-boilerplate/graphs/contributors",
+  "bugs": "https://github.com/Tivoli/curio/issues",
+  "contributors": "https://github.com/Tivoli/curio/graphs/contributors",
   "scripts": {
     "start": "coffee boot.coffee",
     "test": "make test-all"
