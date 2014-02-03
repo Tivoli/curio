@@ -1,27 +1,16 @@
-params    = require('./params')
-mw        = require('./middleware')
-site      = require('./site')
-
-# Sessionless Routes
-app.get '/channel.html', site.channel
-require('./templates')(mw)
+fs      = require('fs')
+params  = require('./params')
+mw      = require('./middleware')
 
 # Global handler for populating data to render page chrome
-app.get /^((?!png|jpg|js|css|woff).)*$/, mw.load_locals, (req, res, next) ->
+app.get /^((?!png|jpg|js|css|woff|html).)*$/, mw.load_locals, (req, res, next) ->
   res.locals.current_user = req.session?.user
   next()
 
-# Site
-app.get '/', site.index
-
-require('./configs')(mw)
-require('./sessions')(mw)
-require('./search')(mw)
-require('./oauth')(mw)
-require('./users')(mw)
-require('./posts')(mw)
-require('./pages')(mw)
-require('./cms')(mw)
+for file in fs.readdirSync(__dirname)
+  path = "#{__dirname}/#{file}"
+  continue unless fs.statSync(path)?.isDirectory()
+  require(path)(mw)
 
 app.get '/:page_or_post', mw.read
 
@@ -32,4 +21,4 @@ unless app.get('env') in ['test', 'development']
       bugsnag.errorHandler(err, req, res, next)
     next(err)
 
-app.use site.error
+app.use mw.error

@@ -1,4 +1,4 @@
-routes  = require('./routes')
+routes = require('./routes')
 
 module.exports = (mw) ->
   app.param ':user', (req, res, next, id) ->
