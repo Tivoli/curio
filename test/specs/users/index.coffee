@@ -37,4 +37,3 @@ describe 'Users GET index', ->
       ids = (user.id for user in users.slice(4,10))
       expect(_(body).every((user) -> user.id in ids)).to.be.true
       done()
-

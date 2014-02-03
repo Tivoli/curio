@@ -1,0 +1,5 @@
+<li>
+  <a href="/cms/posts/{id}">
+    <div>{title}</div>
+  </a>
+</li>

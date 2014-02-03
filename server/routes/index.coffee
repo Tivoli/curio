@@ -44,6 +44,7 @@ app.put '/users/:user', mw.private, users.update
 app.all '/users/:user/roles', mw.restricted, users.update_role
 
 # Posts
+app.get '/posts', posts.index
 app.post '/posts', mw.restricted, posts.create
 app.get '/posts/:post', mw.read
 app.put '/posts/:post', mw.restricted, utils.save_and_send

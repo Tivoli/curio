@@ -1,6 +1,9 @@
 class global.Post extends Model
   @collection: app.mongo.posts
 
+  @sorted: (page, limit) ->
+    @paginated(page, limit).sort('_id', 'desc')
+
   allowed: ['title', 'context']
 
   title:    -> @model.title

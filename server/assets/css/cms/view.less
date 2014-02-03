@@ -18,11 +18,16 @@
   }
 
   ul li {
+    &:last-of-type {
+      a { border-bottom: 1px solid @color-silver; }
+    }
+
     a, a:visited {
       color: @color-black;
       display: block;
       padding: 10px 20px;
       border: 1px solid @color-silver;
+      border-bottom: none;
       border-left: none;
 
       &:hover, &.on {
