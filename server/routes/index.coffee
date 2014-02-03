@@ -16,6 +16,7 @@ app.get '/', site.index
 
 require('./configs')(mw)
 require('./sessions')(mw)
+require('./search')(mw)
 require('./oauth')(mw)
 require('./users')(mw)
 require('./posts')(mw)

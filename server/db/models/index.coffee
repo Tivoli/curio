@@ -22,6 +22,12 @@ class global.Model extends EventEmitter
       limit: limit
     @collection.find({}, opts)
 
+  @search: (query, page=1, limit=20) ->
+    opts =
+      skip: (+page - 1) * limit
+      limit: limit
+    @collection.find(query, opts)
+
   constructor: (@model={}) ->
     @strToID    = Model.strToID
     @dateToID   = Model.dateToID
