@@ -35,4 +35,8 @@ tag:
 	git tag v$(version)
 	git push --tags origin master
 
+clean:
+	rm -f coverage.html
+	rm -rf builtAssets
+
 .PHONY: test test-lint test-cov test-all tag

@@ -1,10 +1,7 @@
 describe 'CMS index', ->
 
-  after ->
-    @browser.logout()
-
   it 'should require a user to access the cms', (done) ->
-    @browser.visit('/cms').then(=>
+    @browser.logout().visit('/cms').then(=>
       expect(@browser.redirected).to.be.true
       expect(@browser.location.pathname).to.equal '/'
       return null

@@ -1,6 +1,0 @@
-<header role='banner'>
-  <a href="/">Home</a>
-  <div class="header-user">
-    {>"templates/header/user":current_user/}
-  </div>
-</header>

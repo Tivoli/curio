@@ -1,4 +1,4 @@
-require('../../app/server')
+require('../../boot')
 require('./browser')
 require('./fakeweb')
 global.db       = require('./database')

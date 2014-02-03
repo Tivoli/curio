@@ -1,0 +1,32 @@
+aside[role=complementary] {
+  background: lighten(@color-black, 5%);
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  + main { margin-left: 200px; }
+
+  ul {
+    li {
+      a, a:visited {
+        color: @color-gray;
+        display: block;
+        line-height: 40px;
+        padding-left: 15px;
+        border-top: 1px solid lighten(@color-black, 10%);
+        border-bottom: 1px solid darken(@color-black, 10%);
+        .transition(all ease-in-out 0.1s);
+
+        &:hover, &.on {
+          color: @color-yellow;
+          background: darken(@color-black, 10%);
+        }
+
+        i { margin-right: 10px; }
+      }
+    }
+  }
+}

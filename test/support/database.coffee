@@ -9,7 +9,7 @@ empty_db = (fn) ->
 
 exports.connect = (done) ->
   do connect = ->
-    return done() if app.mongo.client?.state is 'connected'
+    return done() if app.mongo.db?.state is 'connected'
     setTimeout connect, 5
 
 exports.clear = (done) ->

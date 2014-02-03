@@ -1,0 +1,34 @@
+[data-view] {
+  width: 50%;
+  float: left;
+
+  header {
+    padding: 50px 0 30px 20px;
+    .clearfix;
+
+    h1 {
+      float: left;
+      text-transform: capitalize;
+    }
+
+    form {
+      float: right;
+      input[type=submit] { .border-radius(0 5px 5px 0); }
+    }
+  }
+
+  ul li {
+    a, a:visited {
+      color: @color-black;
+      display: block;
+      padding: 10px 20px;
+      border: 1px solid @color-silver;
+      border-left: none;
+
+      &:hover, &.on {
+        color: @color-white;
+        background: lighten(@color-black, 5%);
+      }
+    }
+  }
+}

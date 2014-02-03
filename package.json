@@ -33,7 +33,6 @@
     "coffee-script":    "latest",
     "connect-assets":   "3.x",
     "connect-redis":    "latest",
-    "connect-busboy":   "latest",
     "redis":            "latest",
     "mongodb":          "latest",
     "underscore":       "latest",
