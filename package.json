@@ -47,7 +47,8 @@
     "bugsnag":          "latest",
     "json2mongo":       "Tivoli/json2mongo",
     "gm":               "latest",
-    "marked":           "latest"
+    "marked":           "latest",
+    "moment":           "latest"
   },
   "devDependencies": {
     "coffeelint": "latest",
