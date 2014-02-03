@@ -39,12 +39,10 @@ MongoClient.connect config.url, config.options, (err, db) ->
   return console.log(err) if err?
   app.mongo.db = db
 
-  app.mongo.users         = db.collection('users')
-  app.mongo.posts         = db.collection('posts')
-  app.mongo.pages         = db.collection('pages')
-  app.mongo.configs       = db.collection('configs')
-  app.mongo.fs_files      = db.collection('fs.files')
-  app.mongo.fs_chunks     = db.collection('fs.chunks')
+  app.mongo.users   = db.collection('users')
+  app.mongo.posts   = db.collection('posts')
+  app.mongo.pages   = db.collection('pages')
+  app.mongo.configs = db.collection('configs')
 
   require('./mongo_indexes')
   require('./models')

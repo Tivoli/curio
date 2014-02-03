@@ -32,7 +32,7 @@ class global.Model extends EventEmitter
     @strToID    = Model.strToID
     @dateToID   = Model.dateToID
     @collection = @constructor.collection
-    _(this).bindAll('populate_images', 'populate_author')
+    _(this).bindAll('populate_author')
     unless @_id()?
       @model = _.pick(@model, @allowed) if @allowed?
       @defaults?()
@@ -58,22 +58,14 @@ class global.Model extends EventEmitter
   set_user: (id) ->
     @set({_user: @strToID(id)})
 
-  populate_images: (fn) ->
-    images = []
-    stream = app.mongo.fs_files.find({'metadata._id': @_id()}).stream()
-    stream.on 'data', (item) -> images.push(new Image(item).toJSON())
-    stream.on 'close', -> fn(null, images)
-
   populate_author: (fn) ->
     User.find @_user(), fn
 
   populate: (fn) ->
     funcs = {}
-    funcs.images = @populate_images
     funcs.author = @populate_author if @_user()?
     async.parallel funcs, (err, results) =>
       return fn(err) if err?
-      @images = results.images or []
       @author = results.author
       fn(null, this)
 

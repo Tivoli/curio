@@ -8,7 +8,7 @@ class global.SiteConfig extends Model
       return new SiteConfig(data).populate(fn) if data?
       new SiteConfig(_id: id).save fn
 
-  blacklist: ['id', '_id', 'images']
+  blacklist: ['id', '_id']
 
   whitelist: (values) ->
     updates = _(values).omit(@blacklist)

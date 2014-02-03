@@ -10,7 +10,6 @@ describe 'SiteConfig website', ->
       twitter_url:    'https://twitter.com/example'
       instagram_url:  'https://instagram.com/example'
       pinterest_url:  'https://pinterest.com/example'
-      images:         []
 
   it 'should not get a website config without a user', (done) ->
     api.get '/configs/website', (e, r, body) ->
