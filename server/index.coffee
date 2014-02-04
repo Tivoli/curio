@@ -13,6 +13,7 @@ assets  = [
 global._        = require('underscore')
 global.async    = require('async')
 global.fleck    = require('fleck')
+global.moment   = require('moment')
 global.request  = require('request').defaults(_json: true)
 global.app      = express()
 global.bugsnag  = require('bugsnag')
@@ -62,9 +63,8 @@ unless  '--seed' in process.argv
   server = require('http').createServer(app)
   server.listen app.get("port"), ->
     unless process.env.NODE_COV
-      months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      now = new Date()
-      console.log("%d %s %s - %s v%s (#{blue}%s#{reset}) port #{red}%d#{reset}", now.getDate(), months[now.getMonth()], now.toLocaleTimeString(), app.get('description'), app.get('version'), app.get('env'), app.get('port'))
+      timestamp = moment().format('D MMM H:mm:ss')
+      console.log("%s - %s v%s (#{blue}%s#{reset}) port #{red}%d#{reset}", timestamp, app.get('description'), app.get('version'), app.get('env'), app.get('port'))
 
 process.on 'SIGINT', ->
   async.series

@@ -1,5 +1,4 @@
 marked  = if exports? then require('marked') else window.marked
-moment  = if exports? then require('moment') else window.moment
 qs      = if exports? then require('querystring').stringify else $.param
 
 dust.helpers.markdown = (chunk, context, bodies, params) ->
