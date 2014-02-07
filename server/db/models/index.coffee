@@ -32,14 +32,14 @@ class global.Model extends EventEmitter
     @strToID    = Model.strToID
     @dateToID   = Model.dateToID
     @collection = @constructor.collection
-    _(this).bindAll('populate_author')
+    for k, v of this when /^populate_/.test(k)
+      @[k] = _(@[k]).bind(this)
     unless @_id()?
       @model = _.pick(@model, @allowed) if @allowed?
       @defaults?()
     return this
 
   _id:        -> @model._id
-  _user:      -> @model._user
   id:         -> @model._id?.toHexString()
   slug:       -> @model.slug
   created_at: -> new Date(@_id().getTimestamp()).toISOString()
@@ -58,15 +58,16 @@ class global.Model extends EventEmitter
   set_user: (id) ->
     @set({_user: @strToID(id)})
 
-  populate_author: (fn) ->
+  populate_user: (fn) ->
     User.find @_user(), fn
 
   populate: (fn) ->
     funcs = {}
-    funcs.author = @populate_author if @_user()?
+    for k, v of @model when /^_(?!id)/.test(k)
+      field = k.slice(1)
+      funcs[field] = @["populate_#{field}"]
     async.parallel funcs, (err, results) =>
-      return fn(err) if err?
-      @author = results.author
+      _(this).extend(results)
       fn(null, this)
 
   save: (fn) ->

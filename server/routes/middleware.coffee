@@ -25,6 +25,12 @@ exports.read = (req, res) ->
     html: -> res.render("application/#{root}/show", json)
     json: -> res.json(json)
 
+exports.get_index = (req, res, next) ->
+  return next() unless utils.is_json_request(req)
+  model   = app.mongo.getModel(req.route.path.slice(1))
+  cursor  = model.sorted_name(req.param('page'), req.param('limit'))
+  utils.streamJSON(req, res, next, cursor)
+
 exports.destroy = (req, res, next) ->
   req.resource.destroy (err) ->
     return next(err) if err

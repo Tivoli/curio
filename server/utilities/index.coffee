@@ -1,6 +1,5 @@
-fs = require('fs')
-require('../shared/underscore_mixins')
-require('../shared/dust_helpers')
+crypto  = require('crypto')
+aws     = null
 
 exports.randomString = (length=32) ->
   str = ''
@@ -33,12 +32,12 @@ exports.save_and_send = (req, res, next) ->
 
 exports.cursorJSON = (cursor, fn) ->
   stream  = cursor.stream()
-  type    = stream._cursor.collection.collectionName
-  model   = global[fleck.inflect(type, 'singularize', 'capitalize')]
+  model   = app.mongo.getModel(stream)
   data    = []
   stream.on 'data', (item) ->
     stream.pause()
     new model(item).populate (err, item) ->
+      return stream.resume() unless item?
       item.set_self?()
       data.push item.toJSON() ; stream.resume()
   stream.on 'close', -> fn(null, data)
@@ -47,3 +46,22 @@ exports.streamJSON = (req, res, next, cursor) ->
   utils.cursorJSON cursor, (err, data) ->
     return next(err) if err?
     res.json(data)
+
+exports.load_shared = (dir) ->
+  require(file) for file in @walk_dir(dir)
+
+exports.cors_policy = ->
+  aws ?= app.get('aws_config')
+  s3_policy =
+    expiration: new Date(Date.now() + (60*30*1000)).toISOString()
+    conditions: [
+      { bucket: aws.s3.bucket }
+      { acl: "public-read" }
+      { success_action_status: '201' }
+      ["starts-with", "$key", ""]
+      ["starts-with", "$Content-Type", ""]
+    ]
+  new Buffer(JSON.stringify(s3_policy)).toString('base64')
+
+exports.cors_signature = (policy) ->
+  crypto.createHmac('sha1', aws.secret).update(policy).digest('base64')

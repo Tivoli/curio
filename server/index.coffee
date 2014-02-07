@@ -11,6 +11,7 @@ assets  = [
 ]
 
 global._        = require('underscore')
+global.fs       = require('fs')
 global.async    = require('async')
 global.fleck    = require('fleck')
 global.moment   = require('moment')
@@ -19,6 +20,7 @@ global.app      = express()
 global.bugsnag  = require('bugsnag')
 global.dust     = require('dustjs-linkedin') ; require('dustjs-helpers')
 global.utils    = require('./utilities')
+utils.load_shared("#{__dirname}/shared")
 
 require('./errors')
 require('./configs')

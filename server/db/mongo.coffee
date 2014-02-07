@@ -35,6 +35,12 @@ app.mongo =
       else Math.floor(new Date(parseInt(date)) / 1000)
     new ObjectID.createFromTime(date)
 
+  getModel: (source) ->
+    source = switch source.constructor.name
+      when 'CursorStream' then source._cursor.collection.collectionName
+      when 'String' then source
+    return global[fleck.inflect(source, 'singularize', 'upperCamelize')]
+
 MongoClient.connect config.url, config.options, (err, db) ->
   return console.log(err) if err?
   app.mongo.db = db

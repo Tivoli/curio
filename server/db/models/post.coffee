@@ -6,6 +6,7 @@ class global.Post extends Model
 
   allowed: ['title', 'context']
 
+  _user:    -> @model._user
   title:    -> @model.title
   context:  -> @model.context
 
@@ -27,4 +28,4 @@ class global.Post extends Model
     slug:       @slug()
     created_at: @created_at()
     context:    @context()
-    author:     @author?.toJSON()
+    author:     @user?.toJSON()

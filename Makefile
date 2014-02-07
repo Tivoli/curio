@@ -39,4 +39,4 @@ clean:
 	rm -f coverage.html
 	rm -rf builtAssets
 
-.PHONY: test test-lint test-cov test-all tag
+.PHONY: test test-lint test-cov test-all tag clean

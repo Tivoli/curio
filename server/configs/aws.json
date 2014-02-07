@@ -1,0 +1,16 @@
+{
+  "defaults": {
+    "key":    "NQBBJLFKFPLTYHOOHFYQ",
+    "secret": "QGWxVwfllxUQiUsT0YnmqFGBMybbYnRvZAlShPpO",
+    "s3": { "bucket": "curio" }
+  },
+  "development": {
+    "s3": { "bucket": "dev-curio" }
+  },
+  "staging": {
+    "cloudfront": "http://v6x9ld31gncysd.cloudfront.net"
+  },
+  "production": {
+    "cloudfront": "http://v6x9ld31gncysd.cloudfront.net"
+  }
+}

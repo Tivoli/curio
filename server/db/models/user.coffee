@@ -14,14 +14,14 @@ class global.User extends Model
       new User(data).populate(fn)
 
   @find_by_token: (token, fn) ->
-    return fn(new Unauthorized()) unless token? and _(token).isString()
+    return fn(new Unauthorized) unless token? and _(token).isString()
     app.redis.get "reset:#{token}", (err, uid) ->
-      return fn(err or new Unauthorized()) unless uid?
+      return fn(err or new Unauthorized) unless uid?
       User.find(uid, fn)
 
   @authenticate: (email, pass, fn) ->
-    return fn(new Unauthorized()) unless _(email).isEmail()
-    return fn(new Unauthorized()) unless _(pass).isString() and pass.length
+    return fn(new Unauthorized) unless _(email).isEmail()
+    return fn(new Unauthorized) unless _(pass).isString() and pass.length
     @find email, (err, user) ->
       return fn(err) if err?
       user.set_self().match_password(pass, fn)
