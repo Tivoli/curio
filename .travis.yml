@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '0.10'
 install:
-  - sudo apt-get install graphicsmagick
+  - sudo apt-get install -qqy graphicsmagick
 services:
   - redis-server
   - mongodb
