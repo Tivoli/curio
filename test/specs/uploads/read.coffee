@@ -1,4 +1,4 @@
-describe 'Covers GET show', ->
+describe 'Uploads GET show', ->
 
   it 'should get a resized image by width', (done) ->
     resized = fs.readFileSync("#{@test_dir}/support/images/image_w_100.jpg")
