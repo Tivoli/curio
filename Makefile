@@ -1,6 +1,6 @@
 default: test
 NODE_ENV = test
-REPORTER = spec
+REPORTER = dot
 MOCHA_OPTS =
 CFLAGS = -c -g -D $(NODE_ENV)
 

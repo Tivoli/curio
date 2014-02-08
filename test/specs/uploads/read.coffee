@@ -4,6 +4,9 @@ describe 'Uploads GET show', ->
     resized = fs.readFileSync("#{@test_dir}/support/images/image_w_100.jpg")
     buffers = []
     stream  = request.get('http://localhost:3001/uploads/images/image?w=100')
+    stream.on 'error', (args...) ->
+      console.log args
+      done()
     stream.on 'data', (data) -> buffers.push(data)
     stream.on 'end', ->
       buffer = Buffer.concat(buffers)
