@@ -1,16 +1,14 @@
 describe 'Uploads GET show', ->
 
   it 'should get a resized image by width', (done) ->
-    console.log @test_dir
     resized = fs.readFileSync("#{@test_dir}/support/images/image_w_100.jpg")
-    console.log resized
     buffers = []
     stream  = request.get('http://localhost:3001/uploads/images/image?w=100')
-    stream.on 'data', (data) ->
-      console.log 'buffers'
-      buffers.push(data)
+    stream.on 'data', (data) -> buffers.push(data)
     stream.on 'end', ->
+      console.log "========="
       buffer = Buffer.concat(buffers)
+      console.log buffer
       expect(buffer).to.deep.equal resized
       done()
 
