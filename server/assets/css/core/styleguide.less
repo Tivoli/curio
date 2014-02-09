@@ -85,3 +85,19 @@ textarea {
   padding: 5px;
   border: 1px solid @color-gray;
 }
+
+.markdown {
+  position: relative;
+  ol, ul { list-style-position: inside; }
+  ul { list-style-type: disc; }
+  ol { list-style-type: decimal; }
+
+  .icon-markdown {
+    color: @color-gray;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 7px;
+    font-size: 18px;
+  }
+}

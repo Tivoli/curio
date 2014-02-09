@@ -1,5 +1,5 @@
 class App.views.Posts extends App.View
-  @mixins('Page')
+  @include('Page')
   template: 'cms/posts/index'
 
   initialize: (opts={}) ->

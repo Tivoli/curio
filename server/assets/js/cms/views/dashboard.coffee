@@ -1,3 +1,3 @@
 class App.views.Dashboard extends App.View
-  @mixins('Page')
+  @include('Page')
   template: 'cms/index'

@@ -1,6 +1,0 @@
-<div data-view='Users'>
-  {>"cms/shared/header" model="users" /}
-  <ul>
-    {#collection}{>"cms/users/list_item"/}{/collection}
-  </ul>
-</div>

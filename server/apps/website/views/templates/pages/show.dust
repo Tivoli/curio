@@ -1,0 +1,8 @@
+{?layout}{>layout/}{:else}{+content/}{/layout}
+{<content}
+<div class='grid-row'>
+  <div class="grid-unit col-4">
+    {@markdown}{context}{/markdown}
+  </div>
+</div>
+{/content}

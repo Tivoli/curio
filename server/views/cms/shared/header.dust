@@ -1,7 +1,0 @@
-<header>
-  <h1>{model}</h1>
-  <form action="/search" method='get' data-core='{model}'>
-    <input type="search" placeholder='Search'>
-    <input class='icon' type="submit" value='&#xe80b;'>
-  </form>
-</header>

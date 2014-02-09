@@ -1,20 +1,20 @@
 class App.View extends Backbone.View
 
-  @mixins: (mixins...) ->
+  @include: (mixins...) ->
     for mixin in mixins
-      continue unless App.mixins[mixin]::?
-      this::[key] = value for key, value of App.mixins[mixin]::
+      for own key, value of App.mixins[mixin]::
+        this::[key] = value
 
   events: ->
     events = {}
-    _(events).extend(v) for k,v of this when /[\w]+_events$/.test(k)
+    _(events).extend(v) for k, v of this when /[\w]+_events$/.test(k)
     return events
-
-  action_events:
-    'submit [data-action=subscribe]': 'form_subscribe'
 
   stop_propagation: (e) ->
     e.stopPropagation() unless e.should_continue
+
+  continue_propagation: (e) ->
+    e.should_continue = true
 
   in_view: ->
     $.contains(document.documentElement, @$el[0])
@@ -26,19 +26,34 @@ class App.View extends Backbone.View
     data = {collection: data} if _(data).isArray()
     return data
 
+  view_template: ->
+    return "templates/#{@template}"
+
+  prerender: ->
+    new Promise (resolve, reject) =>
+      return resolve() unless @model?.id? or @collection?
+      return resolve(@model.toJSON()) if @model?.collection?
+      (@model or @collection).fetch({data: @fetch_options})
+        .done(resolve)
+        .fail(reject)
+
+  post_render: ->
+    FB?.XFBML.parse(@$el[0])
+    @listenTo(@collection, 'add', @on_add) if @collection? and @on_add?
+    @listenTo(@collection, 'select', @on_select) if @collection? and @on_select?
+    @$el.appendTo(@append_to) if @append_to?
+    return this
+
+  render: (@append_to) ->
+    App.current.push(this)
+    @prerender().then (data) =>
+      @listenToOnce(this, 'view:render', @post_render)
+      @render_template()
+    return this
+
   remove: ->
     @trigger('view:remove')
     @stopListening()
     App.remove_view(this)
     $('body').removeClass('noscroll') if @noscroll
     super()
-
-  render: ->
-    App.current.push(this)
-    if @page
-      _el = $("[data-view=#{@page}]")
-      return @setElement(_el).append() if _el.length
-    return @render_template() unless @model? or @collection?
-    (@model or @collection).fetch({data: @fetch_options}).done =>
-      @render_template()
-    return this

@@ -1,5 +1,5 @@
 class App.views.Users extends App.View
-  @mixins('Page')
+  @include('Page')
   template: 'cms/users/index'
 
   initialize: (opts={}) ->

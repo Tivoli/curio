@@ -1,0 +1,6 @@
+{?layout}{>layout/}{:else}{+content/}{/layout}
+{<content}
+<div data-view='Home'>
+Home
+</div>
+{/content}

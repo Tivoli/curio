@@ -7,9 +7,29 @@
   "ascent": 850,
   "glyphs": [
     {
+      "uid": "10bf7b1cedf3917cf1e83f543f111ba8",
+      "css": "markdown",
+      "code": 59404,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M234.4 765.6L234.4 234.4L390.6 234.4L546.9 429.7L703.1 234.4L859.4 234.4L859.4 765.6L703.1 765.6L703.1 460.9L546.9 656.3L390.6 460.9L390.6 765.6ZM1250 765.6L1015.6 507.8L1171.9 507.8L1171.9 234.4L1328.1 234.4L1328.1 507.8L1484.4 507.8Z",
+        "width": 1625
+      },
+      "search": [
+        "markdown"
+      ]
+    },
+    {
       "uid": "9dd9e835aebe1060ba7190ad2b2ed951",
       "css": "search",
       "code": 59403,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d35a1d35efeb784d1dc9ac18b9b6c2b6",
+      "css": "pencil",
+      "code": 59405,
       "src": "fontawesome"
     },
     {
