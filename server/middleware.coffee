@@ -30,7 +30,6 @@ exports.destroy = (req, res, next) ->
     res.send(200)
 
 exports.error = (err, req, res, next) ->
-  console.error err.stack if app.get('env') is 'development'
   res.format
     html: ->
       return res.redirect('/') if err.statusCode is 401

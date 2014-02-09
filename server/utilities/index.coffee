@@ -6,6 +6,10 @@ exports.randomString = (length=32) ->
   str += Math.random().toString(36).substr(2) while str.length < length
   str.substr(0, length)
 
+exports.shortId = ->
+  id = new app.mongo.ObjectID().toHexString()
+  return id.substr(0,10)
+
 exports.walk_dir = (dir) ->
   results = []
   for file in fs.readdirSync(dir)
