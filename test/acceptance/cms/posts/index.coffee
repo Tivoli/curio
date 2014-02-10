@@ -12,7 +12,7 @@ describe 'Posts acceptance index', ->
 
   it 'should have a search header', ->
     header = @browser.query('header', @main)
-    expect(@browser.text('h1', header)).to.equal posts
+    expect(@browser.text('h1', header)).to.equal 'posts'
     expect(@browser.query('form[action="/search"]', header)).to.be.ok
 
   it 'should have a list of posts', ->

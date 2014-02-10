@@ -1,0 +1,23 @@
+<form action="/cms/site" method='post'>
+  <fieldset>
+    <dl>
+      <dt>Title:</dt>
+      <dd><input type="text" name='title' value='{title}' placeholder='Website title' required></dd>
+      <dt>Description:</dt>
+      <dd><input type="text" name='description' value='{description}' placeholder='Website description' required></dd>
+      <dt>Blog:</dt>
+      <dd><input type="text" name='blog_url' value='{blog_url}' placeholder='Blog URL'></dd>
+      <dt>Facebook:</dt>
+      <dd><input type="text" name='facebook_url' value='{facebook_url}' placeholder='Facebook URL'></dd>
+      <dt>Twitter:</dt>
+      <dd><input type="text" name='twitter_url' value='{twitter_url}' placeholder='Twitter URL'></dd>
+      <dt>Instagram:</dt>
+      <dd><input type="text" name='instagram_url' value='{instagram_url}' placeholder='Instagram URL'></dd>
+      <dt>Pinterest:</dt>
+      <dd><input type="text" name='pinterest_url' value='{pinterest_url}' placeholder='Pinterest URL'></dd>
+      <dt>Tumblr:</dt>
+      <dd><input type="text" name='tumblr_url' value='{tumblr_url}' placeholder='Tumblr URL'></dd>
+    </dl>
+    <div><input class='purple' type="submit" value='Save'></div>
+  </fieldset>
+</form>

@@ -20,7 +20,8 @@ test:
 		--bail \
 		test/spec_helper.coffee \
 		test/specs/**/*.coffee \
-		test/acceptance/**/*.coffee
+		test/acceptance/cms/**/*.coffee \
+		test/acceptance/website/**/*.coffee
 
 test-lint:
 	@./node_modules/coffeelint/bin/coffeelint $(OBJECTS) --rules ./test/lint/
