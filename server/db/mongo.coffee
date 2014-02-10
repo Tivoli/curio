@@ -1,4 +1,3 @@
-fs          = require('fs')
 mongodb     = require('mongodb')
 json2mongo  = require('json2mongo')
 config      = app.get('mongo_config')

@@ -1,0 +1,9 @@
+{?layout}{>layout/}{:else}{+content/}{/layout}
+{<content}
+<div data-view='Users'>
+  {>"templates/shared/header" model="users" /}
+  <ul>
+    {#collection}{>"templates/users/list_item"/}{/collection}
+  </ul>
+</div>
+{/content}

@@ -1,4 +1,4 @@
-{?layout}{>"layout"/}{:else}{+content/}{/layout}
+{?layout}{>layout/}{:else}{+content/}{/layout}
 {<content}
 <div data-view='Dashboard'>
 Dashbaord

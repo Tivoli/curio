@@ -1,0 +1,6 @@
+<li>
+  <a href="/cms/posts/{id}">
+    <div>{title}</div>
+    <time datetime={created_at}>{@moment}{created_at}{/moment}</time>
+  </a>
+</li>
