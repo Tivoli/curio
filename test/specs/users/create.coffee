@@ -81,9 +81,9 @@ describe 'Users POST create', ->
       done()
 
   it 'should not store a users plain text password', (done) ->
-    app.mongo.users.findOne username: @user.username.toLowerCase(), (err, user) ->
-      expect(user).to.not.have.property('password')
-      expect(user).to.have.property('hashed_password')
+    User.find @user.username, (err, user) ->
+      expect(user.model).to.not.have.property('password')
+      expect(user.model).to.have.property('hashed_password')
       done()
 
   it 'should not create a new user with the same email', (done) ->

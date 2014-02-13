@@ -21,8 +21,7 @@ exports.resetpassword = (req, res, next) ->
     return next(new BadRequest('Missing or Invalid Email'))
   User.find req.body.email, (err, user) ->
     return next(err) if err?
-    token = "#{utils.randomString(24)}.#{user.id()}"
-    app.redis.set "reset:#{token}", user.id(), 'NX', 'EX', 172800, (err, obj) ->
+    user.update_token (err, token) ->
       return next(err) if err?
       res.send 200
 

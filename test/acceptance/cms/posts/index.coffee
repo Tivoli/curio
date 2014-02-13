@@ -1,4 +1,4 @@
-describe 'Posts acceptance index', ->
+describe 'CMS Posts acceptance index', ->
 
   before (done) ->
     @browser.as_admin().visit('/cms/posts', done)

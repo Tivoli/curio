@@ -1,3 +1,5 @@
+fs = require('fs')
+
 module.exports = (app) ->
   for file in fs.readdirSync(__dirname) when /\.json$/.test(file)
     name    = file.replace '.json', ''

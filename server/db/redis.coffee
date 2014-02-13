@@ -1,6 +1,7 @@
 redis   = require('redis')
-config  = app.get('redis_config')
-client  = redis.createClient(config.port, config.host)
 
-client.select(config.db)
-app.redis = client
+module.exports = (app) ->
+  config    = app.get('redis_config')
+  client    = redis.createClient(config.port, config.host)
+  app.redis = client
+  client.select(config.db)

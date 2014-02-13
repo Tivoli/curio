@@ -11,7 +11,7 @@ before (done) ->
 # Local vars available to individual tests
 before (done) ->
   @test_dir = root_dir
-  @seeds    = "#{root_dir}/../server/db/data/seeds"
+  @seeds    = db.seed_dir
   users     = require("#{@seeds}/users")
   admin     = _(users).find (u) -> 'admin' in (u.roles or [])
   user      = _(users).find (u) -> 'admin' not in (u.roles or [])

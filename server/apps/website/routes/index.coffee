@@ -1,13 +1,10 @@
-module.exports = (app, mw) ->
-  load_locals = (req, res, next) ->
-    return next() if app.locals.website?
-    SiteConfig.find 'website', (err, config) ->
-      return next() if err?
-      app.locals.website = config.toJSON()
-      next()
+fs = require('fs')
+
+module.exports = (app) ->
+  mw  = app.get('middleware')
 
   # Global handler for populating data to render page chrome
-  app.get /^((?!png|jpg|js|css|woff|html).)*$/, load_locals, (req, res, next) ->
+  app.get /^((?!png|jpg|js|css|woff|html).)*$/, mw.load_locals, (req, res, next) ->
     res.locals.current_user = req.session?.user
     next()
 

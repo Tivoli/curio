@@ -1,4 +1,5 @@
 express = require('express')
+app     = express()
 cons    = require('consolidate')
 blue    = '\u001b[34m'
 red     = '\u001b[31m'
@@ -11,20 +12,19 @@ assets  = [
 ]
 
 global._        = require('underscore')
-global.fs       = require('fs')
 global.async    = require('async')
 global.fleck    = require('fleck')
 global.moment   = require('moment')
 global.request  = require('request').defaults(_json: true)
-global.app      = express()
 global.bugsnag  = require('bugsnag')
 global.dust     = require('dustjs-linkedin') ; require('dustjs-helpers')
-global.utils    = require('./utilities')
+global.utils    = require('./utilities')(app)
 utils.load_shared("#{__dirname}/shared")
 
 require('./errors')
 require('./configs')(app)
-app.mw = require('./middleware')
+require('./db/redis')(app)
+require('./db/mongo')(app)
 
 RedisStore  = require('connect-redis')(express)
 app.sessionStore  = new RedisStore(app.get('redis_config'))
@@ -37,6 +37,7 @@ app.set 'views', "#{__dirname}/views"
 app.set 'view engine', 'dust'
 app.set 'apps', "#{__dirname}/apps"
 app.set 'assets', assets
+app.set 'middleware', require('./middleware')(app)
 app.use express.favicon("#{__dirname}/public/favicon.png", maxAge: 2592000000)
 app.use express.urlencoded()
 app.use express.json()
@@ -47,8 +48,7 @@ app.use '/templates', require('./apps/templates')(app)
 app.use '/uploads', require('./apps/uploads')(app)
 app.use '/cms', require('./apps/cms')(app)
 app.use '/', require('./apps/website')(app)
-app.use app.router
-app.use app.mw.error
+app.use app.get('middleware').error
 
 if app.get('env') is 'development'
   app.use express.logger('dev')
@@ -59,9 +59,6 @@ else
   app.use express.static("#{__dirname}/public", maxAge: 86400000)
   app.use bugsnag.requestHandler
   app.use express.compress()
-
-require('./db/mongo')
-require('./db/redis')
 
 unless  '--seed' in process.argv
   server = require('http').createServer(app)
@@ -80,3 +77,5 @@ process.on 'SIGINT', ->
     console.error "Forcefully shutting down"
     process.exit(1)
   , 30*1000
+
+module.exports = app

@@ -1,4 +1,7 @@
+fs = require('fs')
+
 module.exports = (app, mw) ->
+  mw  = app.get('middleware')
   app.get '*', mw.restricted
 
   for file in fs.readdirSync(__dirname)

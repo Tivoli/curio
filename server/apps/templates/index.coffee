@@ -1,3 +1,4 @@
+fs        = require('fs')
 express   = require('express')
 app       = express()
 path      = require('path')

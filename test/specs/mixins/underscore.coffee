@@ -74,7 +74,7 @@ describe 'Mixins underscore', ->
       expect(_('jMJnAGXYLpmK5HdVZQRb5gsR').isObjectID()).to.be.false
 
     it 'should validate an object id as a string or objectid', ->
-      id = new app.mongo.ObjectID
+      id = new curio.mongo.ObjectID
       expect(_(id.toHexString()).isObjectID()).to.be.true
       expect(_(id).isObjectID()).to.be.true
 
