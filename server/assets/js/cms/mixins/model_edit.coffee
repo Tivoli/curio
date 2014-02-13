@@ -8,6 +8,7 @@ class App.mixins.ModelEdit
 
   markdown: (e) ->
     el      = $(e.currentTarget)
+    return unless el.data('preview')?
     @$(el.data('preview')).html(marked(el.val()))
 
   cheatsheet: (e) ->
@@ -46,7 +47,7 @@ class App.mixins.ModelEdit
     return unless window.FormData?
     e.stopPropagation()
     el = $(e.currentTarget)
-    ZaoZao.Api.get('/uploads/cors').done (data) =>
+    App.Api.get('/uploads/cors').done (data) =>
       file  = (e.target.files or e.dataTransfer.files)[0]
       key   = el.data('key').replace('$id', data.short_id)
       fd    = @s3_form_data(data, file, key)
@@ -57,4 +58,4 @@ class App.mixins.ModelEdit
     e.preventDefault()
     el = $(e.currentTarget).validate()
     return if el.data('errors') > 0
-    @model.save(el.serializeObject(), {wait: true})
+    @model.save(el.serializeJSON(), {wait: true})

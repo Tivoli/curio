@@ -11,7 +11,7 @@ class App.views.SessionModal extends App.View
     e.preventDefault()
     el    = $(e.currentTarget).validate()
     return if el.data('errors') > 0
-    data  = el.serializeObject()
+    data  = el.serializeJSON()
     App.Api.post('/sessions', data).done (user) =>
       App.user.set(user)
       @remove()

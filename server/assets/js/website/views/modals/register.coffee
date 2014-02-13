@@ -11,7 +11,7 @@ class App.views.RegisterModal extends App.View
     e.preventDefault()
     el    = $(e.currentTarget).validate()
     return if el.data('errors') > 0
-    data  = el.serializeObject()
+    data  = el.serializeJSON()
     new App.models.User(data).save().done (user) =>
       App.user.set(user)
       @remove()
