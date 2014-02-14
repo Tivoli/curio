@@ -49,3 +49,7 @@ The default tests will run both coffeelint and mocha tests
 To make the coverage file
 
     make test-cov
+
+## License
+
+Licensed under the MIT license.
