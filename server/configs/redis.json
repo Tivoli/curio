@@ -1,10 +1,11 @@
 {
   "defaults": {
-    "host": "localhost",
+    "host": "127.0.0.1",
     "port": 6379,
     "db": 0
   },
   "test": {
+    "host": "127.0.0.1",
     "db": 15
   },
   "production": {

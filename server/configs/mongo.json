@@ -1,12 +1,12 @@
 {
   "defaults": {
-    "url": "mongodb://localhost:27017/curio",
+    "url": "mongodb://127.0.0.1:27017/curio",
     "options": {
       "server": { "poolSize": 4, "auto_reconnect": true }
     }
   },
   "test": {
-    "url": "mongodb://localhost:27017/curio_test"
+    "url": "mongodb://127.0.0.1:27017/curio_test"
   },
   "production": {
     "url": "mongodb://<:ip>:27017,<:ip>:27017/?replicaSet=curio"
