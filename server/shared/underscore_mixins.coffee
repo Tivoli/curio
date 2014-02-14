@@ -23,6 +23,7 @@ _.mixin
     /^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/.test(string)
 
   toSlug: (string) ->
+    return unless _(string).isString()
     string.trim()
       .toLowerCase()
       .replace(/\s+/g, '-')

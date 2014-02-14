@@ -28,7 +28,7 @@ module.exports = (app) ->
   module.save_and_send = (req, res, next) ->
     model = req.resource
     async.waterfall [
-      (done) -> done(null, model.whitelist(req.body))
+      (done) -> done(null, model.amend(req.body))
       (model, done) -> model.validate(done)
       (model, done) -> model.save(done)
       (model, done) -> model.populate(done)

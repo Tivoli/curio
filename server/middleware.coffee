@@ -1,5 +1,8 @@
+bugsnag = require('bugsnag')
+
 module.exports = (app) ->
   module = {}
+  bugsnag.register(app.get('bugsnag_config').key)
 
   module.authed = (req, res, next) ->
     return next() if req.session?.user?
@@ -33,6 +36,8 @@ module.exports = (app) ->
       res.send(200)
 
   module.error = (err, req, res, next) ->
+    if not err.statusCode? or /^5\d+/.test(err.statusCode)
+      bugsnag.notify(err) unless app.get('env') is 'test'
     res.format
       html: ->
         return res.redirect('/') if err.statusCode is 401

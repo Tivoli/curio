@@ -8,14 +8,10 @@ module.exports = (app) ->
       id = id.toLowerCase()
       @collection.findOne {_id: id}, (err, data) ->
         return fn(err) if err?
-        return new SiteConfig(data).populate(fn) if data?
+        return fn(null, new SiteConfig(data)) if data?
         new SiteConfig(_id: id).save fn
 
     blacklist: ['id', '_id']
-
-    whitelist: (values) ->
-      updates = _(values).omit(@blacklist)
-      @set(updates)
 
     toJSON: ->
       json        = _(@model).clone()

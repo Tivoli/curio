@@ -7,7 +7,7 @@ module.exports = (app) ->
     @sorted: (page, limit) ->
       @paginated(page, limit).sort('_id', 'desc')
 
-    allowed: ['title', 'context']
+    whitelist: ['title', 'context']
 
     _user:    -> @model._user
     title:    -> @model.title
@@ -20,10 +20,9 @@ module.exports = (app) ->
         return fn(err or new BadRequest('Invalid User')) unless count
         fn(null, this)
 
-    whitelist: (values) ->
-      updates       = _(values).pick(@allowed)
-      updates.slug  = _(updates.title).toSlug() if updates.title?
-      @set(updates)
+    amend: (values) ->
+      super(values)
+      @set({slug: _(values.title).toSlug()})
 
     toJSON: ->
       id:         @id()

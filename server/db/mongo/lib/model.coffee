@@ -35,11 +35,9 @@ module.exports = (app) ->
       @strToID    = Model.strToID
       @dateToID   = Model.dateToID
       @collection = @constructor.collection
+      @defaults?() unless @_id()?
       for k, v of this when /^populate_/.test(k)
         @[k] = _(@[k]).bind(this)
-      unless @_id()?
-        @model = _.pick(@model, @allowed) if @allowed?
-        @defaults?()
       return this
 
     _id:        -> @model._id
@@ -50,9 +48,10 @@ module.exports = (app) ->
     validate: (fn) ->
       return fn(null, this)
 
-    whitelist: (values) ->
-      updates = _(values).pick(@allowed)
-      @set(updates)
+    amend: (values) ->
+      values = _(values).pick(@whitelist) if @whitelist?
+      values = _(values).omit(@blacklist) if @blacklist?
+      @set(values)
 
     set: (values={}) ->
       @model[key] = val for key, val of values

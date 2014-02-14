@@ -4,7 +4,7 @@ module.exports = (app) ->
   class global.Page extends Model
     @collection: mongo.pages
 
-    allowed: ['path', 'title', 'context']
+    whitelist: ['path', 'title', 'context']
 
     title:    -> @model.title
     path:     -> @model.path_original or @model.path
@@ -16,12 +16,12 @@ module.exports = (app) ->
       return fn(new BadRequest('Missing Context')) unless @context()?.length
       fn(null, this)
 
-    whitelist: (values) ->
-      updates = _(values).pick(@allowed)
-      if updates.path?
-        updates.path_original = updates.path
-        updates.path          = updates.path.toLowerCase()
-      @set(updates)
+    amend: (values) ->
+      super(values)
+      @set({
+        path: values.path?.toLowerCase()
+        path_original: values.path
+      })
 
     toJSON: ->
       id:       @id()

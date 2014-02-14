@@ -33,7 +33,7 @@ module.exports = (app) ->
     @sorted: (page, limit) ->
       @paginated(page, limit).sort('email', 'asc')
 
-    allowed: ['email', 'username', 'password', 'name']
+    whitelist: ['email', 'username', 'password', 'name']
 
     email:            -> @model.email
     username:         -> @model.username_original or @model.username
@@ -67,13 +67,13 @@ module.exports = (app) ->
       return fn(null, this) unless @password()?
       @hash_password(fn)
 
-    whitelist: (values) ->
-      updates = _(values).pick(@allowed)
-      updates.email = updates.email.toLowerCase() if updates.email?
-      if updates.username?
-        updates.username_original = updates.username
-        updates.username          = updates.username.toLowerCase()
-      @set(updates)
+    amend: (values) ->
+      super(values)
+      @set({
+        email: values.email?.toLowerCase()
+        username: values.username?.toLowerCase()
+        username_original: values.username
+      })
 
     hash_password: (fn) ->
       bcrypt.hash @password(), 10, (err, hash) =>

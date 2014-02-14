@@ -16,7 +16,6 @@ global.async    = require('async')
 global.fleck    = require('fleck')
 global.moment   = require('moment')
 global.request  = require('request').defaults(_json: true)
-global.bugsnag  = require('bugsnag')
 global.dust     = require('dustjs-linkedin') ; require('dustjs-helpers')
 global.utils    = require('./utilities')(app)
 utils.load_shared("#{__dirname}/shared")
@@ -55,9 +54,7 @@ if app.get('env') is 'development'
   app.use express.static("#{__dirname}/public")
   app.use express.compress()
 else
-  bugsnag.register(app.get('bugsnag_config').key) unless app.get('env') is 'test'
   app.use express.static("#{__dirname}/public", maxAge: 86400000)
-  app.use bugsnag.requestHandler
   app.use express.compress()
 
 unless  '--seed' in process.argv
