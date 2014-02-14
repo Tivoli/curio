@@ -7,6 +7,10 @@ CFLAGS = -c -g -D $(NODE_ENV)
 # Find all coffee files except in node_modules
 OBJECTS = $(shell find . ! -path "*/node_modules/*" -type f -name "*.coffee")
 
+# Find all test files
+SPECS = $(shell find ./test/specs -type f -name "*.coffee")
+ACCEPTANCE = $(shell find ./test/acceptance -type f -name "*.coffee")
+
 # Get version number from package.json, need this for tagging.
 version = $(shell node -e "console.log(JSON.parse(require('fs').readFileSync('package.json')).version)")
 
@@ -19,9 +23,8 @@ test:
 		--timeout 20s \
 		--bail \
 		test/spec_helper.coffee \
-		test/specs/**/*.coffee \
-		test/acceptance/cms/**/*.coffee \
-		test/acceptance/website/**/*.coffee
+		$(SPECS) \
+		$(ACCEPTANCE)
 
 test-lint:
 	@./node_modules/coffeelint/bin/coffeelint $(OBJECTS) --rules ./test/lint/
