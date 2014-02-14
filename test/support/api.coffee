@@ -3,9 +3,9 @@ module.exports =
     cookie        = _(args).find((arg) -> _(arg).isString())
     data          = _(args).find((arg) -> typeof arg is 'object')
     fn            = _(args).find((arg) -> _(arg).isFunction())
-    uri           = if /^https?:/.test(uri) then uri else "http://127.0.0.1:3001#{uri}"
+    uri           = if /^https?:/.test(uri) then uri else "http://localhost:3001#{uri}"
     jar           = request.jar()
-    jar.setCookie(cookie, 'http://127.0.0.1:3001', {}, -> ) if cookie?
+    jar.setCookie(cookie, 'http://localhost', {}, -> ) if cookie?
     opts          = { uri: uri, method: method, jar: jar }
     opts.headers  = { accept: 'application/json;q=0.9,*/*;q=0.8;' }
     opts[(if method is 'GET' then 'qs' else 'json')] = data if data?

@@ -1,4 +1,6 @@
 zombie = require('zombie')
+zombie.dns.map('localhost', 'A', '127.0.0.1')
+zombie.ports.map('localhost', 3001)
 
 class global.Browser extends zombie
 
@@ -6,7 +8,7 @@ class global.Browser extends zombie
     @user_cookie  = @user_cookie.split('=')[1]
     @admin_cookie = @admin_cookie.split('=')[1]
     opts =
-      site: 'http://127.0.0.1:3001'
+      site: 'http://localhost'
       silent: true
     super(opts)
 
