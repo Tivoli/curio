@@ -22,7 +22,8 @@ utils.load_shared("#{__dirname}/shared")
 
 require('./errors')
 require('./configs')(app)
-mongo = require('./mongo')(app)
+mongo       = require('./mongo')(app)
+MongoStore  = require('connect-mongo')(express)
 
 app.engine('dust', cons.dust)
 app.set 'port', process.env.PORT or 3000
@@ -38,10 +39,14 @@ app.use express.compress()
 app.use express.methodOverride()
 app.use express.urlencoded()
 app.use express.json()
-app.use express.cookieParser('curio cookie')
+app.use express.cookieParser()
 
 mongo.on 'open', ->
-  app.use express.session(cookie: {maxAge: 604800000}, store: app.mongo.session_store)
+  app.use express.session(
+    secret: 'curio cookie'
+    cookie: {maxAge: 604800000}
+    store: new MongoStore(db: mongo._db)
+  )
   app.use '/templates', require('./apps/templates')(app)
   app.use '/uploads', require('./apps/uploads')(app)
   app.use '/admin', require('./apps/admin')(app)

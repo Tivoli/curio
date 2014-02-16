@@ -1,4 +1,3 @@
-express     = require('express')
 mongodb     = require('mongodb')
 MongoClient = mongodb.MongoClient
 ObjectID    = mongodb.ObjectID
@@ -6,7 +5,6 @@ ObjectID    = mongodb.ObjectID
 module.exports = (app) ->
   config      = app.get('mongo_config')
   seed        = require('./seed')(app)
-  MongoStore  = require('connect-mongo')(express)
 
   app.mongo =
     ObjectID: ObjectID
@@ -36,7 +34,6 @@ module.exports = (app) ->
   client.connect config.url, config.options, (err, _db) ->
     throw new MongoError(err.message) if err?
     app.mongo.db = _db
-    app.mongo.session_store = new MongoStore(db: _db)
     require('./collections')(app)
     require('./lib')(app)
     require('./models')(app)
