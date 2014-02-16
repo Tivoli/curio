@@ -1,5 +1,8 @@
+<header>
+  <h1>General Settings</h1>
+</header>
 <form action="/admin/site" method='post'>
-  <fieldset>
+  <fieldset class='data-list'>
     <dl>
       <dt>Title:</dt>
       <dd><input type="text" name='title' value='{title}' placeholder='Website title' required></dd>
@@ -18,6 +21,6 @@
       <dt>Tumblr:</dt>
       <dd><input type="text" name='tumblr_url' value='{tumblr_url}' placeholder='Tumblr URL'></dd>
     </dl>
-    <div><input class='purple' type="submit" value='Save'></div>
+    <div><input type="submit" value='Update'></div>
   </fieldset>
 </form>

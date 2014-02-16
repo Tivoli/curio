@@ -17,5 +17,6 @@
     <script src='/templates/website.js'></script>
     {>"scripts/google"/}
     {>"scripts/facebook"/}
+    {>"scripts/twitter"/}
   </body>
 </html>

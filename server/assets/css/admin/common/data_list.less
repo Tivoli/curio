@@ -1,0 +1,23 @@
+fieldset.data-list {
+  padding-left: 40px;
+
+  dl {
+    dt {
+      color: @color-white;
+      float: left;
+      width: 125px;
+      font-weight: 600;
+      line-height: 30px;
+      padding: 0 10px;
+      background: @color-black;
+
+      + dd {
+        margin: 0 0 10px 135px;
+        input:not([type=submit]) { width: 100%; }
+      }
+    }
+  }
+
+  div:last-child { text-align: right; }
+}
+

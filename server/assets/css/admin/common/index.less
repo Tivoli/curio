@@ -1,7 +1,12 @@
-[data-view] {
-  width: 50%;
-  float: left;
+main[role=main] {
+  > [data-view] {
+    width: 50%;
+    float: left;
+  }
 
-  @import './header';
-  @import './model_list';
+  [data-view] {
+    @import './header';
+    @import './model_list';
+    @import './data_list';
+  }
 }
