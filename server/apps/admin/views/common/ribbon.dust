@@ -2,9 +2,10 @@
   <nav>
     <ul>
       <li><a href="/admin"><i class="icon-gauge"></i>Dashboard</a></li>
-      <li><a href="/admin/settings"><i class="icon-cog"></i>Settings</a></li>
       <li><a href="/admin/users"><i class="icon-users"></i>Users</a></li>
       <li><a href="/admin/posts"><i class="icon-post"></i>Posts</a></li>
+      <li><a href="/admin/pages"><i class="icon-pages"></i>Pages</a></li>
+      <li><a href="/admin/settings"><i class="icon-cog"></i>Settings</a></li>
     </ul>
   </nav>
 </aside>

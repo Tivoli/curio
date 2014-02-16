@@ -5,7 +5,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qqy graphicsmagick
 services:
-  - redis-server
   - mongodb
 after_success:
   - "make test-cov && ./.update-gh-pages.sh"

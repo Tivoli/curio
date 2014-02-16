@@ -5,7 +5,7 @@ Curio
 
 [code coverage](http://tivoli.github.io/curio/coverage.html "Code Coverage")
 
-Curio is a modular Nodejs app built on top of express, mongodb, and redis
+Curio is a modular Nodejs app built on top of express and mongodb
 
 #### Motivation
 
@@ -16,7 +16,6 @@ I wanted to build out my own boilerplate Nodejs app that can be extended to any 
 Make sure you have the following installed
 
 * Mongodb
-* Redis
 * Nodejs
 
 Clone the repository:

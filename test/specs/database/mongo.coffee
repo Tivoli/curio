@@ -16,3 +16,8 @@ describe 'Mongo', ->
       expect(index).to.include.keys('path_1')
       expect(index).to.include.keys('title_1')
       done()
+
+  it 'should have indexes on the tokens collection', (done) ->
+    curio.mongo.tokens.indexInformation (err, index) ->
+      expect(index).to.include.keys('expires_1')
+      done()

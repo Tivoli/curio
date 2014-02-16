@@ -4,7 +4,6 @@ blocked.push(fleck.pluralize(k)) for k in blocked
 
 module.exports = (app) ->
   mongo = app.mongo
-  redis = app.redis
 
   class global.User extends Model
     @collection: mongo.users
@@ -19,9 +18,9 @@ module.exports = (app) ->
 
     @find_by_token: (token, fn) ->
       return fn(new Unauthorized) unless token? and _(token).isString()
-      app.redis.get "reset:#{token}", (err, uid) ->
-        return fn(err or new Unauthorized) unless uid?
-        User.find(uid, fn)
+      mongo.tokens.findOne {_id: token}, (err, token) ->
+        return fn(err or new Unauthorized) unless token?
+        User.find(token._user, fn)
 
     @authenticate: (email, pass, fn) ->
       return fn(new Unauthorized) unless _(email).isEmail()
@@ -94,10 +93,13 @@ module.exports = (app) ->
       @update(query, fn)
 
     update_token: (fn) ->
-      token = "#{utils.randomString(24)}.#{@id()}"
-      redis.set "reset:#{token}", @id(), 'NX', 'EX', 172800, (err, obj) ->
-        return fn(new RedisError(err.message)) if err?
-        fn(null, obj)
+      doc =
+        _id: "#{utils.randomString(24)}.#{@id()}"
+        _user: @_id()
+        expires: new Date()
+      mongo.tokens.insert doc, (err, doc) ->
+        return fn(new MongoError(err.message)) if err?
+        fn(null, doc)
 
     save: (fn) ->
       delete @model.password

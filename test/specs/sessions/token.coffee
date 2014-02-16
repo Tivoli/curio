@@ -38,8 +38,7 @@ describe 'Sessions GET token', ->
       done()
 
   it 'should sign in with a valid token', (done) ->
-    curio.redis.keys 'reset:*', (err, keys) ->
-      token = _(keys).first().split(':')[1]
-      api.get '/sessions/token', {token: token}, (e, r, body) ->
+    curio.mongo.tokens.findOne {}, (err, token) ->
+      api.get '/sessions/token', {token: token._id}, (e, r, body) ->
         expect(r.statusCode).to.equal 200
         done()

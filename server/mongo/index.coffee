@@ -1,10 +1,12 @@
+express     = require('express')
 mongodb     = require('mongodb')
 MongoClient = mongodb.MongoClient
 ObjectID    = mongodb.ObjectID
 
 module.exports = (app) ->
-  config  = app.get('mongo_config')
-  seed    = require('./seed')(app)
+  config      = app.get('mongo_config')
+  seed        = require('./seed')(app)
+  MongoStore  = require('connect-mongo')(express)
 
   app.mongo =
     ObjectID: ObjectID
@@ -30,9 +32,11 @@ module.exports = (app) ->
         when 'String' then source
       return global[fleck.inflect(source, 'singularize', 'upperCamelize')]
 
-  MongoClient.connect config.url, config.options, (err, _db) ->
+  client = new MongoClient()
+  client.connect config.url, config.options, (err, _db) ->
     throw new MongoError(err.message) if err?
     app.mongo.db = _db
+    app.mongo.session_store = new MongoStore(db: _db)
     require('./collections')(app)
     require('./lib')(app)
     require('./models')(app)
@@ -41,3 +45,5 @@ module.exports = (app) ->
       return process.exit(0) unless app.get('env') is 'development'
       console.log '=== Seeding local database ==='
       app.mongo.seed(-> process.exit(0))
+
+  return client

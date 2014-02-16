@@ -17,3 +17,7 @@ module.exports = (app) ->
   mongo.pages = mongo.db.collection('pages')
   mongo.pages.ensureIndex 'path', {unique: true}, ->
   mongo.pages.ensureIndex 'title', {unique: true}, ->
+
+  # Tokens
+  mongo.tokens = mongo.db.collection('tokens')
+  mongo.tokens.ensureIndex {expires: 1}, {expireAfterSeconds: 86400 * 2}, ->
