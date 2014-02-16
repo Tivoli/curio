@@ -2,8 +2,8 @@
 {<content}
 <div data-view='Posts'>
   {>"templates/shared/header" model="posts" /}
-  <ul>
-    {#collection}{>"templates/posts/list_item"/}{/collection}
-  </ul>
+  <div class="model-list">
+    <ul>{#collection}{>"templates/posts/list_item"/}{/collection}</ul>
+  </div>
 </div>
 {/content}

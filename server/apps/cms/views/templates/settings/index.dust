@@ -1,8 +1,8 @@
 {?layout}{>layout/}{:else}{+content/}{/layout}
 {<content}
-<div data-view='Website'>
+<div data-view='Settings'>
   <div data-view='SiteConfig'>
-  {?website}{>"templates/website/site_config":website/}{/website}
+  {?website}{>"templates/settings/site_config":website/}{/website}
   </div>
 </div>
 {/content}

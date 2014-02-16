@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li><a href="/cms"><i class="icon-gauge"></i>Dashboard</a></li>
-      <li><a href="/cms/website"><i class="icon-cloud"></i>Website</a></li>
+      <li><a href="/cms/settings"><i class="icon-cog"></i>Settings</a></li>
       <li><a href="/cms/users"><i class="icon-users"></i>Users</a></li>
       <li><a href="/cms/posts"><i class="icon-post"></i>Posts</a></li>
     </ul>

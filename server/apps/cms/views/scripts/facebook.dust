@@ -4,7 +4,6 @@
     window.fbAsyncInit = function() {
       FB.init({
         appId:      {fb.app_id},
-        channelUrl: '//' + location.host + '/channel.html',
         status:     true,
         xfbml:      true
       });

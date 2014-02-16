@@ -1,3 +1,4 @@
 {
-  "ext": "js json coffee dust less"
+  "ext": "js json coffee dust less",
+  "ignore": ["server/public/**/*"]
 }

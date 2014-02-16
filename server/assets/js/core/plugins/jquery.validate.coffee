@@ -7,7 +7,7 @@ $.fn.validate = (status_only) ->
   $('.error', form).removeClass('error')
   fields.each (idx) ->
     el        = $(this)
-    required  = el.prop('required')
+    required  = el.attr('required')
     pattern   = if el.attr('pattern')
       new RegExp(el.attr('pattern'), 'i')
     invalid = (required and not el.val().length) or (pattern? and not pattern.test(el.val()))

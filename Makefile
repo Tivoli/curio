@@ -20,14 +20,14 @@ test:
 		$(MOCHA_OPTS) \
 		--compilers coffee:coffee-script/register \
 		--require test/support/setup \
-		--timeout 20s \
+		--timeout 10s \
 		--bail \
 		test/spec_helper.coffee \
 		$(SPECS) \
 		$(ACCEPTANCE)
 
 test-lint:
-	@./node_modules/coffeelint/bin/coffeelint $(OBJECTS) --rules ./test/lint/
+	@./node_modules/.bin/coffeelint $(OBJECTS) --rules ./test/lint/
 
 test-cov:
 	@NODE_COV=1 $(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=html-cov > coverage.html

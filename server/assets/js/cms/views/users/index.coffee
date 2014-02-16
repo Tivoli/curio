@@ -1,5 +1,5 @@
 class App.views.Users extends App.View
-  @include('Page')
+  @include('Page', 'ModelList')
   page: 'Users'
   template: 'users/index'
 

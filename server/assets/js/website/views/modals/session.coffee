@@ -1,6 +1,5 @@
 class App.views.SessionModal extends App.View
-  @include('Overlay')
-
+  @include('Modal')
   ov_id:    'session_modal'
   template: 'modals/session'
 

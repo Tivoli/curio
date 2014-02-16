@@ -3,18 +3,22 @@ class App.mixins.Overlay
   ov_class:   'ov_content'
 
   overlay_events:
-    'click':                        'remove'
-    'click .close, [data-close]':   'remove'
-    'click .ov_content':            'stop_propagation'
-    'click a[href], a[data-modal]': 'continue_propagation'
+    'click .close, [data-close]': 'close'
+
+  close: (e) ->
+    @$el.removeClass('open')
+    @$el.one 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', =>
+      @remove()
+
+  on_append: ->
+    @$el.offset()
+    @$el.addClass('open')
 
   render_template: ->
     @noscroll   = true
-    @append_to  = $('body').addClass('noscroll')
-    body  = $('<div />', class: 'ov_body').appendTo(@$el)
-    inner = $('<div />', class: 'ov_inner').appendTo(body)
-    @$ov  = $('<div />', class: @ov_class, id: @ov_id).appendTo(inner)
+    @prepend_to  = $('body').addClass('noscroll')
     dust.render @view_template(), @view_data(), (err, out) =>
-      @$ov.html(out)
+      @$el.html(out)
+      @listenToOnce(this, 'view:append', @on_append)
       @trigger('view:render')
     return this

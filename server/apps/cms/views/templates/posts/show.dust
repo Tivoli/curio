@@ -1,0 +1,10 @@
+<a class="close"><i class="icon-cancel"></i></a>
+<form action='/posts' method='post'>
+  <div><input type='text' name='title' value='{title}' placeholder='Title' required></div>
+  <div class='markdown'><i class='icon-markdown'></i><textarea name='context' data-preview='.preview .context' placeholder='Write post' required>{context}</textarea></div>
+  <div><input type='submit' value='Publish'></div>
+</form>
+
+<div class="preview">
+  <div class="context">{@markdown}{context}{/markdown}</div>
+</div>

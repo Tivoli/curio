@@ -5,10 +5,19 @@ class App.View extends Backbone.View
       for own key, value of App.mixins[mixin]::
         this::[key] = value
 
+  view_events:
+    'click a[data-action]': 'call_action'
+
   events: ->
     events = {}
     _(events).extend(v) for k, v of this when /[\w]+_events$/.test(k)
     return events
+
+  call_action: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    action = $(e.currentTarget).data('action')
+    @[action](e)
 
   stop_propagation: (e) ->
     e.stopPropagation() unless e.should_continue
@@ -39,9 +48,12 @@ class App.View extends Backbone.View
 
   post_render: ->
     FB?.XFBML.parse(@$el[0])
+    twttr?.widgets.load(@$el[0])
     @listenTo(@collection, 'add', @on_add) if @collection? and @on_add?
     @listenTo(@collection, 'select', @on_select) if @collection? and @on_select?
     @$el.appendTo(@append_to) if @append_to?
+    @$el.prependTo(@prepend_to) if @prepend_to?
+    @trigger('view:append')
     return this
 
   render: (@append_to) ->

@@ -46,7 +46,11 @@ body {
 
 main { padding-bottom: 50px; }
 
-* { outline: 0; .box-sizing; }
+* {
+  outline: 0;
+  .box-sizing(border-box);
+  &:before, &:after { .box-sizing(border-box); }
+}
 
 ol, ul {
   margin: 0; padding: 0;
@@ -96,8 +100,8 @@ textarea {
     color: @color-gray;
     cursor: pointer;
     position: absolute;
-    bottom: 0;
-    right: 7px;
+    bottom: 5px;
+    right: 10px;
     font-size: 18px;
   }
 }

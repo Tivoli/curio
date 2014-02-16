@@ -1,7 +1,16 @@
 <header>
   <h1>{model}</h1>
-  <form action="/search" method='get' data-core='{model}'>
-    <input type="search" placeholder='Search'>
-    <input class='icon' type="submit" value='&#xe80b;'>
-  </form>
+  <ul>
+    {^no_create}
+    <li><a class='button' data-action='create_model'><i class="icon-plus"></i></a></li>
+    {/no_create}
+    <li>
+      <form action="/search" method='get' data-core='{model}'>
+        <input type="search" placeholder='Search'>
+        <input type="submit">
+      </form>
+      <a class='button' data-action='toggle_search'><i class="icon-search"></i>
+      </a>
+    </li>
+  </ul>
 </header>

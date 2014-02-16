@@ -1,5 +1,5 @@
 class App.views.RegisterModal extends App.View
-  @include('Overlay')
+  @include('Modal')
 
   ov_id:    'register_modal'
   template: 'modals/register'

@@ -13,7 +13,9 @@ describe 'Users acceptance index', ->
   it 'should have a search header', ->
     header = @browser.query('header', @main)
     expect(@browser.text('h1', header)).to.equal 'users'
+    expect(@browser.query('[data-action="create_model"]', header)).to.be.null
+    expect(@browser.query('[data-action="toggle_search"]', header)).to.be.ok
     expect(@browser.query('form[action="/search"]', header)).to.be.ok
 
   it 'should have a list of users', ->
-    expect(@browser.queryAll('ul li', @main)).to.have.length 20
+    expect(@browser.queryAll('.model-list ul li', @main)).to.have.length 20

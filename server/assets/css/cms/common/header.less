@@ -1,0 +1,40 @@
+header {
+  padding: 50px 0 30px 20px;
+  .clearfix;
+
+  h1 {
+    float: left;
+    text-transform: capitalize;
+  }
+
+  ul {
+    float: right;
+
+    li {
+      float: left;
+      border-left: 1px solid lighten(@color-black, 10%);
+      border-right: 1px solid darken(@color-black, 10%);
+
+      &:first-child {
+        border-left: none;
+        a { .border-radius(5px 0 0 5px); }
+      }
+
+      &:last-child {
+        border-right: none;
+        a { .border-radius(0 5px 5px 0); }
+      }
+
+      a, a:visited { color: @color-white; }
+
+      form[action='/search'] {
+        max-width: 0;
+        display: inline-block;
+        .transition(max-width 250ms);
+        input[type=search] { width: 100%; }
+        input[type=submit] { display: none; }
+        &.open { max-width: 180px; }
+      }
+    }
+  }
+}

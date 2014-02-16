@@ -1,14 +1,14 @@
 describe 'Website acceptance index', ->
 
   before (done) ->
-    @browser.as_admin().visit('/cms/website', done)
+    @browser.as_admin().visit('/cms/settings', done)
 
   before ->
     @main   = @browser.query('main[role=main]')
     @ribbon = @browser.query('aside[role=complementary]')
 
   it 'should highlight the side nav', ->
-    expect(@browser.text('.on', @ribbon)).to.equal 'Website'
+    expect(@browser.text('.on', @ribbon)).to.equal 'Settings'
 
   it 'should have a site config', ->
     module = @browser.query('[data-view=SiteConfig]', @main)

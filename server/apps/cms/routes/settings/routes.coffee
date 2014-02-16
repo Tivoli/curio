@@ -3,4 +3,4 @@ exports.index = (req, res, next) ->
     website: (done) -> SiteConfig.find('website', done)
   , (err, results) ->
     res.locals[k] = v.toJSON() for k, v of results
-    res.render 'templates/website/index'
+    res.render 'templates/settings/index'

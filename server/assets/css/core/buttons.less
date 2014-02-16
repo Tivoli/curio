@@ -12,14 +12,15 @@ button,
   height: 30px;
   line-height: 30px;
   border: none;
-  background: @color-black;
+  background: lighten(@color-black, 5%);
   .user-select(none);
+  .transition(all ease-in-out 100ms);
 
   &.rounded { .border-radius(5px); }
   &.icon { font-family: fontello; }
+  &:hover { background: lighten(@color-black, 10%); }
 
   &:active, &.active {
-    text-shadow: 0 0 1px rgba(0,0,0,0.5);
-    .box-shadow(inset 0px 2px 5px 1px rgba(22, 23, 23, .8));
+    .box-shadow(inset 0px 2px 5px 1px rgba(150, 150, 150, .5));
   }
 }
