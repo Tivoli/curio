@@ -45,7 +45,7 @@ app.use express.session(cookie: {maxAge: 604800000}, store: app.sessionStore)
 app.use express.methodOverride()
 app.use '/templates', require('./apps/templates')(app)
 app.use '/uploads', require('./apps/uploads')(app)
-app.use '/cms', require('./apps/cms')(app)
+app.use '/admin', require('./apps/admin')(app)
 app.use '/', require('./apps/website')(app)
 app.use app.get('middleware').error
 

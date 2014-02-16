@@ -1,7 +1,7 @@
 describe 'CMS Posts index', ->
 
   before (done) ->
-    @browser.as_admin().visit('/cms/posts', done)
+    @browser.as_admin().visit('/admin/posts', done)
 
   before ->
     @main   = @browser.query('main[role=main]')

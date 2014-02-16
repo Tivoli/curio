@@ -1,5 +1,5 @@
 <li>
-  <a href="/cms/users/{id}">
+  <a href="/admin/users/{id}">
     <div>{username} ({email})</div>
     <div>{?is_admin}Admin{/is_admin}</div>
   </a>

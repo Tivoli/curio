@@ -1,7 +1,7 @@
 describe 'Users acceptance index', ->
 
   before (done) ->
-    @browser.as_admin().visit('/cms/users', done)
+    @browser.as_admin().visit('/admin/users', done)
 
   before ->
     @main   = @browser.query('main[role=main]')

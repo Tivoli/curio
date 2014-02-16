@@ -1,7 +1,7 @@
 describe 'Website acceptance index', ->
 
   before (done) ->
-    @browser.as_admin().visit('/cms/settings', done)
+    @browser.as_admin().visit('/admin/settings', done)
 
   before ->
     @main   = @browser.query('main[role=main]')

@@ -1,8 +1,8 @@
 AppRouter::routes =
-  'cms':              'dashboard'
-  'cms/settings':     'settings'
-  'cms/users(/:id)':  'users'
-  'cms/posts(/:id)':  'posts'
+  'admin':              'dashboard'
+  'admin/settings':     'settings'
+  'admin/users(/:id)':  'users'
+  'admin/posts(/:id)':  'posts'
 
 App.router = new AppRouter
 

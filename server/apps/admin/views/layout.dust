@@ -13,7 +13,7 @@
     <main role='main'>{+content/}</main>
     {>"scripts/jquery"/}
     {js|s}
-    <script src='/templates/cms.js'></script>
+    <script src='/templates/admin.js'></script>
     {>"scripts/google"/}
     {>"scripts/facebook"/}
   </body>

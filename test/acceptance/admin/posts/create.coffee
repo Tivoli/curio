@@ -2,7 +2,7 @@ describe 'CMS Posts create', ->
 
   before (done) ->
     @base_post = factory.post()
-    @browser.as_admin().visit('/cms/posts', done)
+    @browser.as_admin().visit('/admin/posts', done)
 
   before (done) ->
     @browser.clickLink('[data-action="create_model"]', done)
