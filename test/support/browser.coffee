@@ -20,6 +20,13 @@ class global.Browser extends zombie
     @setCookie(name: 'connect.sid', value: @admin_cookie)
     return this
 
+  sign_in: (user, fn) ->
+    api.post '/sessions', user, (e, r, body) =>
+      cookie = r.headers['set-cookie'].pop().split(';')[0]
+      cookie = cookie.split('=')[1]
+      @setCookie(name: 'connect.sid', value: cookie)
+      fn()
+
   reset_form: (form) ->
     for field in @queryAll('[name]', form)
       @fill(field, null)

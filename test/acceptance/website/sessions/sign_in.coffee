@@ -1,4 +1,4 @@
-describe 'Sessions sign in', ->
+describe 'Website Sessions sign in', ->
 
   before (done) ->
     @base_user =

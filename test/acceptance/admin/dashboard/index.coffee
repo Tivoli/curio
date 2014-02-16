@@ -1,4 +1,4 @@
-describe 'CMS index', ->
+describe 'CMS Dashboard index', ->
 
   it 'should require a user to access the admin', (done) ->
     @browser.logout().visit('/admin').then(=>

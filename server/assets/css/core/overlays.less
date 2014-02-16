@@ -10,13 +10,10 @@
   .translateY(100%);
   .transition(transform 500ms, visibility 0s 500ms);
 
-  ~ main { .transition(transform 500ms); }
-
   &.open {
     visibility: visible;
     .translateY(0%);
     .transition(transform 500ms);
-    ~ main { .scale(0.8); }
   }
 
   .close {

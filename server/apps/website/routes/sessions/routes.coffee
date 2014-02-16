@@ -7,7 +7,8 @@ exports.create = (req, res, next) ->
 
 exports.destroy = (req, res) ->
   req.session.destroy ->
-    res.redirect req.get('referer')
+    back = req.get('referer') or '/'
+    res.redirect(back)
 
 exports.token = (req, res, next) ->
   User.find_by_token req.query.token, (err, user) ->
