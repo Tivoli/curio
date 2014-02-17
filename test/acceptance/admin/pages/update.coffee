@@ -18,7 +18,6 @@ describe 'Admin Pages update', ->
       expect(@browser.query('#page_overlay')).to.be.null
       page_item = @browser.query('.model-list li:nth-child(5)', @main)
       expect(@browser.text('.title', page_item)).to.equal 'A New Title'
-      expect(@browser.text('.path', page_item)).to.equal 'page-198'
       return null
     ).then(done, done)
 
