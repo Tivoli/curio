@@ -9,7 +9,7 @@ Curio is a modular Nodejs app built on top of express and mongodb
 
 #### Motivation
 
-I wanted to build out my own boilerplate Nodejs app that can be extended to any website with a CMS.
+I wanted to build out my own boilerplate Nodejs app that can be extended to any website with a set of Admin tools.
 
 ## Installation
 

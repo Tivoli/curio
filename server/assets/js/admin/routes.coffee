@@ -3,6 +3,7 @@ AppRouter::routes =
   'admin/settings':     'settings'
   'admin/users(/:id)':  'users'
   'admin/posts(/:id)':  'posts'
+  'admin/pages(/:id)':  'pages'
 
 App.router = new AppRouter
 
@@ -17,3 +18,6 @@ App.router.on 'route:users', (id) ->
 
 App.router.on 'route:posts', (id) ->
   new App.views.Posts().render()
+
+App.router.on 'route:pages', (id) ->
+  new App.views.Pages().render()

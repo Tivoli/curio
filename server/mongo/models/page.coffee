@@ -2,7 +2,7 @@ module.exports = (app) ->
   mongo = app.mongo
 
   class global.Page extends Model
-    @collection: mongo.pages
+    @collection:  mongo.pages
 
     whitelist: ['path', 'title', 'context']
 

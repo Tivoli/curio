@@ -6,7 +6,8 @@ module.exports = (app) ->
   mongo = app.mongo
 
   class global.User extends Model
-    @collection: mongo.users
+    @collection:  mongo.users
+    @order_by:    [['email', 'asc']]
 
     @find_by_auth: (source, uid, fn) ->
       query =
@@ -28,9 +29,6 @@ module.exports = (app) ->
       @find email, (err, user) ->
         return fn(err) if err?
         user.set_self().match_password(pass, fn)
-
-    @sorted: (page, limit) ->
-      @paginated(page, limit).sort('email', 'asc')
 
     whitelist: ['email', 'username', 'password', 'name']
 

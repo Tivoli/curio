@@ -1,11 +1,9 @@
-describe 'CMS Posts create', ->
+describe 'Admin Posts create', ->
 
   before (done) ->
     @base_post = factory.post()
-    @browser.as_admin().visit('/admin/posts', done)
-
-  before (done) ->
-    @browser.clickLink('[data-action="create_model"]', done)
+    @browser.as_admin().visit '/admin/posts', =>
+      @browser.clickLink('[data-action="create_model"]', done)
 
   before ->
     @main     = @browser.query('main[role=main]')

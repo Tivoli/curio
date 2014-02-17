@@ -6,6 +6,7 @@ module.exports = (app) ->
   class global.Model extends EventEmitter
     @strToID:   (id) -> mongo.stringToID(id)
     @dateToID:  (date) -> mongo.dateToID(date)
+    @order_by:  [['_id', 'desc']]
 
     @find: (id, fn) ->
       query = {$or: []}
@@ -23,7 +24,7 @@ module.exports = (app) ->
       opts =
         skip: (+page - 1) * limit
         limit: limit
-      @collection.find({}, opts)
+      @collection.find({}, opts).sort(@order_by)
 
     @search: (query, page=1, limit=20) ->
       opts =

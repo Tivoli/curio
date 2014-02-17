@@ -1,7 +1,8 @@
 <a class="close"><i class="icon-cancel"></i></a>
-<form action='/posts' method='post'>
+<form action="/pages" method='post'>
   <div><input type='text' name='title' value='{title}' placeholder='Title' required></div>
-  <div class='markdown'><i class='icon-markdown'></i><textarea name='context' data-preview='.preview .context' placeholder='Write post' required>{context}</textarea></div>
+  <div><input type='text' name='path' value='{path}' placeholder='Path' required></div>
+  <div class='markdown'><i class='icon-markdown'></i><textarea name='context' data-preview='.preview .context' placeholder='Page content' required>{context}</textarea></div>
   <div><input type='submit' value='{?id}Update{:else}Publish{/id}'></div>
 </form>
 <div class="preview">

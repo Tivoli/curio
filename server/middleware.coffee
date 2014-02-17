@@ -27,7 +27,7 @@ module.exports = (app) ->
   module.get_index = (req, res, next) ->
     return next() unless utils.is_json_request(req)
     model   = utils.to_model(req.route.path.slice(1))
-    cursor  = model.sorted_name(req.param('page'), req.param('limit'))
+    cursor  = model.paginated(req.param('page'), req.param('limit'))
     utils.streamJSON(req, res, next, cursor)
 
   module.destroy = (req, res, next) ->

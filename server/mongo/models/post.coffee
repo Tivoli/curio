@@ -2,10 +2,7 @@ module.exports = (app) ->
   mongo = app.mongo
 
   class global.Post extends Model
-    @collection: mongo.posts
-
-    @sorted: (page, limit) ->
-      @paginated(page, limit).sort('_id', 'desc')
+    @collection:  mongo.posts
 
     whitelist: ['title', 'context']
 

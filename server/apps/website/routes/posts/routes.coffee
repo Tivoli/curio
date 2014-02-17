@@ -1,5 +1,5 @@
 exports.index = (req, res, next) ->
-  cursor = Post.sorted(req.param('page'), req.param('limit'))
+  cursor = Post.paginated(req.param('page'), req.param('limit'))
   utils.streamJSON(req, res, next, cursor)
 
 exports.create = (req, res, next) ->

@@ -1,0 +1,6 @@
+<li>
+  <a href="/admin/pages/{id}" data-id='{id}'>
+    <div class='title'>{title}</div>
+    <div class="path">{path}</div>
+  </a>
+</li>
