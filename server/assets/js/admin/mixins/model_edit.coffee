@@ -58,4 +58,6 @@ class App.mixins.ModelEdit
     e.preventDefault()
     el = $(e.currentTarget).validate()
     return if el.data('errors') > 0
-    @model.save(el.serializeJSON(), {wait: true})
+    data = el.serializeJSON()
+    delete data.password if data.password?.length is 0
+    @model.save(data, {wait: true})

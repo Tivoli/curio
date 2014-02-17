@@ -22,3 +22,19 @@ describe 'Admin Users update', ->
       user_item = @browser.query('.model-list li:nth-child(5)', @main)
       expect(@browser.text('.admin', user_item)).to.equal ''
       done()
+
+  it 'should update a users username', (done) ->
+    @browser.fill('username', 'Warby').pressButton('Update').then(=>
+      user_item = @browser.query('.model-list li:nth-child(5)', @main)
+      expect(@browser.text('.username', user_item)).to.equal 'Warby (zombie101@example.com)'
+      return null
+    ).then(done, done)
+
+  it 'should update a users email', (done) ->
+    @browser.clickLink('.model-list li:nth-child(5) a').then(=>
+      @browser.fill('email', 'warby@example.com').pressButton('Update').then(=>
+        user_item = @browser.query('.model-list li:nth-child(5)', @main)
+        expect(@browser.text('.username', user_item)).to.equal 'Warby (warby@example.com)'
+        return null
+      ).then(done, done)
+    )
