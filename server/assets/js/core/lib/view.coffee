@@ -30,8 +30,6 @@ class App.View extends Backbone.View
 
   view_data: ->
     return {} unless @model? or @collection?
-    @listenToOnce(@model, 'destroy', @remove) if @model?
-    @listenToOnce(@model, 'remove', @remove) if @model?
     data = (@model or @collection)?.toJSON()
     data = {collection: data} if _(data).isArray()
     return data
@@ -52,6 +50,8 @@ class App.View extends Backbone.View
     twttr?.widgets.load(@$el[0])
     @listenTo(@collection, 'add', @on_add) if @collection? and @on_add?
     @listenTo(@collection, 'select', @on_select) if @collection? and @on_select?
+    @listenToOnce(@model, 'destroy', @remove) if @model?
+    @listenToOnce(@model, 'remove', @remove) if @model?
     @$el.appendTo(@append_to) if @append_to?
     @$el.prependTo(@prepend_to) if @prepend_to?
     @trigger('view:append')
