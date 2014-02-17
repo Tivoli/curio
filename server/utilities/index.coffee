@@ -38,7 +38,7 @@ module.exports = (app) ->
 
   module.cursorJSON = (cursor, fn) ->
     stream  = cursor.stream()
-    model   = app.mongo.getModel(stream)
+    model   = @to_model(stream)
     data    = []
     stream.on 'data', (item) ->
       stream.pause()

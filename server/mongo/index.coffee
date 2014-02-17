@@ -24,12 +24,6 @@ module.exports = (app) ->
         else Math.floor(new Date(parseInt(date)) / 1000)
       new ObjectID.createFromTime(date)
 
-    getModel: (source) ->
-      source = switch source.constructor.name
-        when 'CursorStream' then source._cursor.collection.collectionName
-        when 'String' then source
-      return global[fleck.inflect(source, 'singularize', 'upperCamelize')]
-
   client = new MongoClient()
   client.connect config.url, config.options, (err, _db) ->
     throw new MongoError(err.message) if err?

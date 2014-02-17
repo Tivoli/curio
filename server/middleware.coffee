@@ -26,7 +26,7 @@ module.exports = (app) ->
 
   module.get_index = (req, res, next) ->
     return next() unless utils.is_json_request(req)
-    model   = app.mongo.getModel(req.route.path.slice(1))
+    model   = utils.to_model(req.route.path.slice(1))
     cursor  = model.sorted_name(req.param('page'), req.param('limit'))
     utils.streamJSON(req, res, next, cursor)
 
