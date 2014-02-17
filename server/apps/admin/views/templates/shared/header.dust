@@ -5,8 +5,8 @@
     <li><a class='button' data-action='create_model'><i class="icon-plus"></i></a></li>
     {/no_create}
     <li>
-      <form action="/search" method='get' data-core='{model}'>
-        <input type="search" placeholder='Search'>
+      <form action="/search" method='get'>
+        <input type="search" placeholder='Search' data-core='{model}'>
         <input type="submit">
       </form>
       <a class='button' data-action='toggle_search'><i class="icon-search"></i>

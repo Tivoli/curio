@@ -5,7 +5,8 @@ class App.mixins.Page
     for child in @$('[data-view]')
       el    = $(child)
       model = @collection?.get(el.data('id')) if el.data('id')
-      new App.views[el.data('view')](el: el, model: model).render()
+      view  = new App.views[el.data('view')](el: el, model: model).render()
+      view.listenToOnce(model, 'remove', view.remove) if model?
     @trigger('view:render')
 
   render_template: ->

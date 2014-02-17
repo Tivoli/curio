@@ -31,6 +31,7 @@ class App.View extends Backbone.View
   view_data: ->
     return {} unless @model? or @collection?
     @listenToOnce(@model, 'destroy', @remove) if @model?
+    @listenToOnce(@model, 'remove', @remove) if @model?
     data = (@model or @collection)?.toJSON()
     data = {collection: data} if _(data).isArray()
     return data
