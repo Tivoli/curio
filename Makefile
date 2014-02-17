@@ -20,7 +20,7 @@ test:
 		$(MOCHA_OPTS) \
 		--compilers coffee:coffee-script/register \
 		--require test/support/setup \
-		--timeout 10s \
+		--timeout 20s \
 		--bail \
 		test/spec_helper.coffee \
 		$(SPECS) \

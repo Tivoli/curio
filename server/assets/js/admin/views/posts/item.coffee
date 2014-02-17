@@ -1,5 +1,6 @@
 class App.views.PostItem extends App.View
   @include('Module', 'ListItem')
+  template: 'posts/list_item'
 
   initialize: (opts={}) ->
     @listenTo @model, 'sync', @on_sync

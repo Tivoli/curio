@@ -11,5 +11,6 @@ class App.views.Posts extends App.View
     new App.views.Post(model: model).render()
 
   on_add: (model) ->
-    dust.render 'templates/posts/list_item', model.toJSON(), (err, out) =>
-      @$('.model-list ul').prepend(out)
+    view = new App.views.PostItem(model: model)
+    view.prepend_to = @$('.model-list ul')
+    view.render()
