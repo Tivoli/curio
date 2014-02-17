@@ -7,12 +7,11 @@ describe 'Website acceptance index', ->
     @browser.as_admin().visit('/admin/settings', done)
 
   before ->
-    @main   = @browser.query('main[role=main]')
-    @form   = @browser.query('form', @main)
-    @ribbon = @browser.query('aside[role=complementary]')
+    @main = @browser.query('main[role=main]')
+    @form = @browser.query('form', @main)
 
   it 'should highlight the side nav', ->
-    expect(@browser.text('.on', @ribbon)).to.equal 'Settings'
+    expect(@browser.text('nav .on')).to.equal 'Settings'
 
   it 'should have a site config', ->
     module = @browser.query('[data-view=SiteConfig]', @main)

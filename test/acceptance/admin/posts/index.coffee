@@ -4,11 +4,10 @@ describe 'Admin Posts index', ->
     @browser.as_admin().visit('/admin/posts', done)
 
   before ->
-    @main   = @browser.query('main[role=main]')
-    @ribbon = @browser.query('aside[role=complementary]')
+    @main = @browser.query('main[role=main]')
 
   it 'should highlight the side nav', ->
-    expect(@browser.text('.on', @ribbon)).to.equal 'Posts'
+    expect(@browser.text('nav .on')).to.equal 'Posts'
 
   it 'should have a search header', ->
     header = @browser.query('header', @main)
