@@ -26,7 +26,7 @@ describe 'Admin Users update', ->
   it 'should update a users username', (done) ->
     @browser.fill('username', 'Warby').pressButton('Update').then(=>
       user_item = @browser.query('.model-list li:nth-child(5)', @main)
-      expect(@browser.text('.username', user_item)).to.equal 'Warby (zombie101@example.com)'
+      expect(@browser.text('.username', user_item)).to.contain 'Warby'
       return null
     ).then(done, done)
 

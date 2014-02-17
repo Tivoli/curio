@@ -5,7 +5,7 @@
   <div><input type='password' name='password' placeholder='Password'></div>
   <div><input type='submit' value='{?id}Update{:else}Create{/id}'></div>
 </form>
-<div class="roles">
+<div class="col-right">
   <div class="title">User Roles</div>
   <div>
     <input id='is_admin' type="checkbox" name='is_admin'>
