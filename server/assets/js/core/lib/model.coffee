@@ -12,3 +12,7 @@ class App.Model extends Backbone.Model
     idx = @collection.indexOf(this) + 1
     return @collection.first() if idx is @collection.length
     @collection.at(idx)
+
+  ajax: (path, method='get', data) ->
+    path    = path.replace(/^\//, '')
+    App.Api[method.toLowerCase()]("#{@url()}/#{path}", data)

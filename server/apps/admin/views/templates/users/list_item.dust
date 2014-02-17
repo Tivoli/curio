@@ -1,6 +1,7 @@
-<li>
+<li data-view='UserItem' data-id='{id}'>
   <a href="/admin/users/{id}">
-    <div>{username} ({email})</div>
-    <div>{?is_admin}Admin{/is_admin}</div>
+    <div class='username'>{username} ({email})</div>
+    <div class='admin'>{?is_admin}Admin{/is_admin}</div>
+    <i class="icon-pencil"></i>
   </a>
 </li>

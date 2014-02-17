@@ -10,6 +10,7 @@ module.exports = (app) ->
 
   module.private = (req, res, next) ->
     return next() if req.session?.user?.id is req.resource.id()
+    return next() if req.session?.user?.is_admin
     next(new Unauthorized)
 
   module.restricted = (req, res, next) ->

@@ -4,4 +4,4 @@ class App.models.User extends App.Model
   name:     -> @get('name')
   username: -> @get('username')
   email:    -> @get('email')
-
+  is_admin: -> @get('is_admin')

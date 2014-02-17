@@ -1,0 +1,13 @@
+<a class="close"><i class="icon-cancel"></i></a>
+<form action="/users/{id}" method='put'>
+  <div><input type='text' name='username' value='{username}' placeholder='Username' required></div>
+  <div><input type='text' name='email' value='{email}' placeholder='Email address' required></div>
+  <div><input type='submit' value='{?id}Update{:else}Create{/id}'></div>
+</form>
+<div class="roles">
+  <div class="title">User Roles</div>
+  <div>
+    <input id='is_admin' type="checkbox" name='is_admin'>
+    <label for="is_admin">Admin</label>
+  </div>
+</div>
