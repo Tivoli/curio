@@ -38,7 +38,7 @@ module.exports = (app) ->
 
   module.error = (err, req, res, next) ->
     if not err.statusCode? or /^5\d+/.test(err.statusCode)
-      bugsnag.notify(err) unless app.get('env') is 'test'
+      bugsnag.notify(err) unless app.get('env') in ['development', 'test']
     res.format
       html: ->
         return res.redirect('/') if err.statusCode is 401
