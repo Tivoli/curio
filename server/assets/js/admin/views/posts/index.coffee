@@ -5,9 +5,9 @@ class App.views.Posts extends App.View
 
   initialize: (opts={}) ->
     @collection = new App.collections.Posts
-    @listenTo this, 'view:create', @edit_post
+    @listenTo this, 'view:create', @on_select
 
-  edit_post: (model) ->
+  on_select: (model) ->
     new App.views.Post(model: model).render()
 
   on_add: (model) ->

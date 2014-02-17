@@ -1,6 +1,7 @@
-<li>
-  <a href="/admin/posts/{id}" data-id='{id}'>
+<li data-view='PostItem' data-id='{id}'>
+  <a href="/admin/posts/{id}">
     <div class='title'>{title}</div>
     <time datetime={created_at}>{@moment}{created_at}{/moment}</time>
+    <i class="icon-pencil"></i>
   </a>
 </li>

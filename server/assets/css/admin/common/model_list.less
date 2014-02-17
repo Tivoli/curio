@@ -7,14 +7,24 @@
     a, a:visited {
       color: @color-black;
       display: block;
+      position: relative;
       padding: 10px 20px;
       border: 1px solid @color-silver;
       border-bottom: none;
       border-left: none;
 
+      &:hover .icon-pencil { display: block; }
+
       &:hover, &.on {
         color: @color-white;
         background: lighten(@color-black, 5%);
+      }
+
+      .icon-pencil {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
       }
     }
   }
