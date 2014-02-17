@@ -2,8 +2,11 @@ express = require('express')
 app     = express()
 
 module.exports = (core) ->
+  middleware = core.get('middleware')
+  _(middleware).extend(require('./middleware')(app))
+
   app.set 'views', "#{__dirname}/views"
-  app.set 'middleware', core.get('middleware')
+  app.set 'middleware', middleware
 
   if app.get('env') is 'development'
     app.use express.logger('dev')

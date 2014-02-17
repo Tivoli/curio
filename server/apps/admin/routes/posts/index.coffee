@@ -1,4 +1,2 @@
-routes = require('./routes')
-
 module.exports = (app, mw) ->
-  app.get '/posts', routes.index
+  app.get '/posts', mw.render_index

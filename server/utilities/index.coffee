@@ -56,4 +56,10 @@ module.exports = (app) ->
   module.load_shared = (dir) ->
     require(file) for file in @walk_dir(dir)
 
+  module.to_model = (source) ->
+    source = switch source.constructor.name
+      when 'CursorStream' then source._cursor.collection.collectionName
+      when 'String' then source
+    return global[fleck.inflect(source, 'singularize', 'upperCamelize')]
+
   return module
