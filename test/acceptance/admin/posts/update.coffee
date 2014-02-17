@@ -22,7 +22,7 @@ describe 'Admin Posts update', ->
     ).then(done, done)
 
   it 'should update a post context', (done) ->
-    @browser.fill('context', 'Updated page content').pressButton('Update').then(=>
+    @browser.fill('context', 'Updated post content').pressButton('Update').then(=>
       expect(@browser.query('#post_overlay')).to.be.null
       post_item = @browser.query('.model-list li:first-of-type', @main)
       expect(@browser.text('.title', post_item)).to.equal 'A New Title'

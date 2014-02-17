@@ -5,11 +5,12 @@ class App.views.Pages extends App.View
 
   initialize: (opts={}) ->
     @collection = new App.collections.Pages
-    @listenTo this, 'view:create', @edit_page
+    @listenTo this, 'view:create', @on_select
 
-  edit_page: (model) ->
+  on_select: (model) ->
     new App.views.Page(model: model).render()
 
   on_add: (model) ->
-    dust.render 'templates/pages/list_item', model.toJSON(), (err, out) =>
-      @$('.model-list ul').prepend(out)
+    view = new App.views.PageItem(model: model)
+    view.prepend_to = @$('.model-list ul')
+    view.render()

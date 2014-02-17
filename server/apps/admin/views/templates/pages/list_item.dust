@@ -1,6 +1,7 @@
-<li>
-  <a href="/admin/pages/{id}" data-id='{id}'>
+<li data-view='PageItem' data-id='{id}'>
+  <a href="/admin/pages/{id}">
     <div class='title'>{title}</div>
     <div class="path">{path}</div>
+    <i class="icon-pencil"></i>
   </a>
 </li>

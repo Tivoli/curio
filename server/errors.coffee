@@ -18,8 +18,3 @@ class global.MongoError extends Error
   constructor: (@message) ->
     @statusCode = 500
     super()
-
-class global.RedisError extends Error
-  constructor: (@message) ->
-    @statusCode = 500
-    super()
