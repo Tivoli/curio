@@ -1,6 +1,5 @@
 class App.mixins.Overlay
   className:  'overlay'
-  ov_class:   'ov_content'
 
   overlay_events:
     'click .close, [data-close]': 'close'

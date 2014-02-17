@@ -1,0 +1,21 @@
+#post_overlay,
+#page_overlay {
+  form, .preview {
+    width: 50%;
+    padding: 0 20px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  form {
+    border-right: 1px dashed rgba(0, 0, 0, 0.15);
+
+    > div {
+      margin-bottom: 15px;
+      input:not([type=submit]),
+      textarea { width: 100%; }
+      textarea { height: 350px; }
+      &:last-child { text-align: right; }
+    }
+  }
+}

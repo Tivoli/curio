@@ -1,4 +1,5 @@
 {
+  "verbose": true,
   "ext": "js json coffee dust less",
   "ignore": ["server/public/**/*"]
 }
