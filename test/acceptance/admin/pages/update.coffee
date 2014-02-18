@@ -4,7 +4,6 @@ describe 'Admin Pages update', ->
     @browser.as_admin().visit('/admin/pages', done)
 
   before ->
-    @main     = @browser.query('main[role=main]')
     @overlay  = @browser.query('#page_overlay')
     @form     = @browser.query('form', @overlay)
     @title    = @browser.query('[name=title]', @form)
@@ -16,7 +15,7 @@ describe 'Admin Pages update', ->
   it 'should update a page title', (done) ->
     @browser.fill('title', 'A New Title').pressButton('Update').then(=>
       expect(@browser.query('#page_overlay')).to.be.null
-      page_item = @browser.query('.model-list li:nth-child(5)', @main)
+      page_item = @browser.query('.model-list li:nth-child(5)')
       expect(@browser.text('.title', page_item)).to.equal 'A New Title'
       return null
     ).then(done, done)
@@ -24,7 +23,7 @@ describe 'Admin Pages update', ->
   it 'should update a page path', (done) ->
     @browser.fill('path', 'new-path').pressButton('Update').then(=>
       expect(@browser.query('#page_overlay')).to.be.null
-      page_item = @browser.query('.model-list li:nth-child(5)', @main)
+      page_item = @browser.query('.model-list li:nth-child(5)')
       expect(@browser.text('.title', page_item)).to.equal 'A New Title'
       expect(@browser.text('.path', page_item)).to.equal 'new-path'
       return null
@@ -33,7 +32,7 @@ describe 'Admin Pages update', ->
   it 'should update a page context', (done) ->
     @browser.fill('context', 'New page content').pressButton('Update').then(=>
       expect(@browser.query('#page_overlay')).to.be.null
-      page_item = @browser.query('.model-list li:nth-child(5)', @main)
+      page_item = @browser.query('.model-list li:nth-child(5)')
       expect(@browser.text('.title', page_item)).to.equal 'A New Title'
       expect(@browser.text('.path', page_item)).to.equal 'new-path'
       return null

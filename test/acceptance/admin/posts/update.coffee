@@ -4,7 +4,6 @@ describe 'Admin Posts update', ->
     @browser.as_admin().visit('/admin/posts', done)
 
   before ->
-    @main     = @browser.query('main[role=main]')
     @overlay  = @browser.query('#post_overlay')
     @form     = @browser.query('form', @overlay)
     @title    = @browser.query('[name=title]', @form)
@@ -16,7 +15,7 @@ describe 'Admin Posts update', ->
   it 'should update a post title', (done) ->
     @browser.fill('title', 'A New Title').pressButton('Update').then(=>
       expect(@browser.query('#post_overlay')).to.be.null
-      post_item = @browser.query('.model-list li:first-of-type', @main)
+      post_item = @browser.query('.model-list li:first-of-type')
       expect(@browser.text('.title', post_item)).to.equal 'A New Title'
       return null
     ).then(done, done)
@@ -24,7 +23,7 @@ describe 'Admin Posts update', ->
   it 'should update a post context', (done) ->
     @browser.fill('context', 'Updated post content').pressButton('Update').then(=>
       expect(@browser.query('#post_overlay')).to.be.null
-      post_item = @browser.query('.model-list li:first-of-type', @main)
+      post_item = @browser.query('.model-list li:first-of-type')
       expect(@browser.text('.title', post_item)).to.equal 'A New Title'
       return null
     ).then(done, done)
